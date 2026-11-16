@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 import { GAME_WIDTH, GAME_HEIGHT, COLORS } from '../config/game-config';
 import { LEVELS, STEADY_DELAY_MIN, STEADY_DELAY_MAX, LevelConfig } from '../config/levels';
-import { DEATH_ANIMATIONS } from '../config/animations';
 import { gameState } from '../utils/game-state';
 
 type GamePhase = 'intro' | 'ready' | 'steady' | 'waiting' | 'bang' | 'shooting' | 'result';

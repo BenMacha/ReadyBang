@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { GAME_WIDTH, GAME_HEIGHT, COLORS } from '../config/game-config';
+import { GAME_WIDTH, COLORS } from '../config/game-config';
 import { LEVELS } from '../config/levels';
 import { gameState } from '../utils/game-state';
 
