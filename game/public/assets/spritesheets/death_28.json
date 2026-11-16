@@ -2,714 +2,712 @@
   "frames": {
     "death_28_0001.png": {
       "frame": {
-        "x": 396,
-        "y": 310,
-        "w": 54,
-        "h": 82
+        "x": 538,
+        "y": 640,
+        "w": 164,
+        "h": 108
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 148,
-        "y": 45,
-        "w": 54,
-        "h": 82
+        "x": 295,
+        "y": 91,
+        "w": 164,
+        "h": 108
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0002.png": {
       "frame": {
-        "x": 452,
-        "y": 226,
-        "w": 56,
-        "h": 86
+        "x": 538,
+        "y": 880,
+        "w": 172,
+        "h": 112
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 150,
-        "y": 44,
-        "w": 56,
-        "h": 86
+        "x": 301,
+        "y": 87,
+        "w": 172,
+        "h": 112
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0003.png": {
       "frame": {
-        "x": 2,
-        "y": 494,
-        "w": 88,
-        "h": 70
+        "x": 836,
+        "y": 872,
+        "w": 174,
+        "h": 138
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 150,
-        "y": 33,
-        "w": 88,
-        "h": 70
+        "x": 300,
+        "y": 66,
+        "w": 174,
+        "h": 138
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0004.png": {
       "frame": {
-        "x": 314,
-        "y": 400,
-        "w": 78,
-        "h": 84
+        "x": 836,
+        "y": 2,
+        "w": 156,
+        "h": 170
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 165,
-        "y": 19,
-        "w": 78,
-        "h": 84
+        "x": 330,
+        "y": 37,
+        "w": 156,
+        "h": 170
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0005.png": {
       "frame": {
-        "x": 94,
-        "y": 448,
-        "w": 88,
-        "h": 76
+        "x": 340,
+        "y": 406,
+        "w": 152,
+        "h": 176
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 171,
-        "y": 11,
-        "w": 88,
-        "h": 76
+        "x": 342,
+        "y": 23,
+        "w": 152,
+        "h": 176
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0006.png": {
       "frame": {
-        "x": 222,
-        "y": 400,
-        "w": 90,
-        "h": 70
+        "x": 828,
+        "y": 406,
+        "w": 136,
+        "h": 178
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 176,
-        "y": 10,
-        "w": 90,
-        "h": 70
+        "x": 353,
+        "y": 20,
+        "w": 136,
+        "h": 178
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0007.png": {
       "frame": {
-        "x": 184,
-        "y": 472,
-        "w": 86,
-        "h": 76
+        "x": 836,
+        "y": 698,
+        "w": 148,
+        "h": 172
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 185,
-        "y": 13,
-        "w": 86,
-        "h": 76
+        "x": 371,
+        "y": 27,
+        "w": 148,
+        "h": 172
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0008.png": {
       "frame": {
-        "x": 2,
-        "y": 416,
-        "w": 90,
-        "h": 76
+        "x": 340,
+        "y": 824,
+        "w": 150,
+        "h": 178
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 194,
-        "y": 10,
-        "w": 90,
-        "h": 76
+        "x": 388,
+        "y": 20,
+        "w": 150,
+        "h": 178
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0009.png": {
       "frame": {
-        "x": 128,
-        "y": 362,
-        "w": 92,
-        "h": 84
+        "x": 318,
+        "y": 1018,
+        "w": 166,
+        "h": 182
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 195,
-        "y": 8,
-        "w": 92,
-        "h": 84
+        "x": 390,
+        "y": 16,
+        "w": 166,
+        "h": 182
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0010.png": {
       "frame": {
-        "x": 396,
-        "y": 394,
-        "w": 100,
-        "h": 92
+        "x": 336,
+        "y": 640,
+        "w": 200,
+        "h": 182
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 191,
-        "y": 8,
-        "w": 100,
-        "h": 92
+        "x": 383,
+        "y": 16,
+        "w": 200,
+        "h": 182
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0011.png": {
       "frame": {
-        "x": 282,
-        "y": 310,
-        "w": 112,
-        "h": 88
+        "x": 538,
+        "y": 228,
+        "w": 222,
+        "h": 176
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 188,
-        "y": 11,
-        "w": 112,
-        "h": 88
+        "x": 377,
+        "y": 22,
+        "w": 222,
+        "h": 176
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0012.png": {
       "frame": {
-        "x": 2,
-        "y": 330,
-        "w": 124,
-        "h": 84
+        "x": 762,
+        "y": 228,
+        "w": 246,
+        "h": 168
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 187,
-        "y": 16,
-        "w": 124,
-        "h": 84
+        "x": 375,
+        "y": 31,
+        "w": 246,
+        "h": 168
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0013.png": {
       "frame": {
-        "x": 148,
-        "y": 276,
-        "w": 132,
-        "h": 84
+        "x": 486,
+        "y": 60,
+        "w": 262,
+        "h": 166
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 185,
-        "y": 17,
-        "w": 132,
-        "h": 84
+        "x": 370,
+        "y": 34,
+        "w": 262,
+        "h": 166
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0014.png": {
       "frame": {
-        "x": 310,
-        "y": 226,
-        "w": 140,
-        "h": 82
+        "x": 2,
+        "y": 1202,
+        "w": 280,
+        "h": 162
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 185,
-        "y": 20,
-        "w": 140,
-        "h": 82
+        "x": 370,
+        "y": 40,
+        "w": 280,
+        "h": 162
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0015.png": {
       "frame": {
         "x": 2,
-        "y": 250,
-        "w": 144,
-        "h": 78
+        "y": 1366,
+        "w": 286,
+        "h": 152
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 186,
-        "y": 24,
-        "w": 144,
-        "h": 78
+        "x": 372,
+        "y": 49,
+        "w": 286,
+        "h": 152
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0016.png": {
       "frame": {
-        "x": 162,
-        "y": 204,
-        "w": 146,
-        "h": 70
+        "x": 538,
+        "y": 406,
+        "w": 288,
+        "h": 140
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 186,
-        "y": 31,
-        "w": 146,
-        "h": 70
+        "x": 374,
+        "y": 62,
+        "w": 288,
+        "h": 140
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0017.png": {
       "frame": {
-        "x": 328,
-        "y": 162,
-        "w": 148,
-        "h": 62
+        "x": 538,
+        "y": 756,
+        "w": 296,
+        "h": 122
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 188,
-        "y": 40,
-        "w": 148,
-        "h": 62
+        "x": 375,
+        "y": 81,
+        "w": 296,
+        "h": 122
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0018.png": {
       "frame": {
         "x": 2,
-        "y": 198,
-        "w": 158,
-        "h": 50
+        "y": 1018,
+        "w": 314,
+        "h": 100
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 51,
-        "w": 158,
-        "h": 50
+        "x": 366,
+        "y": 102,
+        "w": 314,
+        "h": 100
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0019.png": {
       "frame": {
-        "x": 166,
-        "y": 162,
-        "w": 160,
-        "h": 40
+        "x": 2,
+        "y": 938,
+        "w": 320,
+        "h": 78
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 61,
-        "w": 160,
-        "h": 40
+        "x": 367,
+        "y": 123,
+        "w": 320,
+        "h": 78
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0020.png": {
       "frame": {
         "x": 2,
-        "y": 162,
-        "w": 162,
-        "h": 34
+        "y": 872,
+        "w": 322,
+        "h": 64
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 68,
-        "w": 162,
-        "h": 34
+        "x": 367,
+        "y": 137,
+        "w": 322,
+        "h": 64
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0021.png": {
       "frame": {
-        "x": 338,
-        "y": 130,
-        "w": 164,
-        "h": 30
+        "x": 2,
+        "y": 814,
+        "w": 326,
+        "h": 56
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 72,
-        "w": 164,
-        "h": 30
+        "x": 367,
+        "y": 145,
+        "w": 326,
+        "h": 56
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0022.png": {
       "frame": {
         "x": 2,
-        "y": 130,
-        "w": 166,
-        "h": 30
+        "y": 756,
+        "w": 328,
+        "h": 56
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 72,
-        "w": 166,
-        "h": 30
+        "x": 367,
+        "y": 145,
+        "w": 328,
+        "h": 56
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0023.png": {
       "frame": {
-        "x": 170,
-        "y": 130,
-        "w": 166,
-        "h": 30
+        "x": 2,
+        "y": 698,
+        "w": 330,
+        "h": 56
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 72,
-        "w": 166,
-        "h": 30
+        "x": 367,
+        "y": 145,
+        "w": 330,
+        "h": 56
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0024.png": {
       "frame": {
         "x": 2,
-        "y": 2,
-        "w": 168,
-        "h": 30
+        "y": 640,
+        "w": 332,
+        "h": 56
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 72,
-        "w": 168,
-        "h": 30
+        "x": 367,
+        "y": 145,
+        "w": 332,
+        "h": 56
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0025.png": {
       "frame": {
-        "x": 172,
-        "y": 2,
-        "w": 168,
-        "h": 30
+        "x": 2,
+        "y": 408,
+        "w": 334,
+        "h": 56
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 72,
-        "w": 168,
-        "h": 30
+        "x": 367,
+        "y": 145,
+        "w": 334,
+        "h": 56
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0026.png": {
       "frame": {
-        "x": 342,
-        "y": 2,
-        "w": 168,
-        "h": 30
+        "x": 2,
+        "y": 118,
+        "w": 334,
+        "h": 56
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 72,
-        "w": 168,
-        "h": 30
+        "x": 367,
+        "y": 145,
+        "w": 334,
+        "h": 56
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0027.png": {
       "frame": {
         "x": 2,
-        "y": 34,
-        "w": 168,
-        "h": 30
+        "y": 350,
+        "w": 334,
+        "h": 56
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 72,
-        "w": 168,
-        "h": 30
+        "x": 367,
+        "y": 145,
+        "w": 334,
+        "h": 56
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0028.png": {
       "frame": {
-        "x": 172,
-        "y": 34,
-        "w": 168,
-        "h": 30
+        "x": 2,
+        "y": 2,
+        "w": 336,
+        "h": 56
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 72,
-        "w": 168,
-        "h": 30
+        "x": 367,
+        "y": 145,
+        "w": 336,
+        "h": 56
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0029.png": {
       "frame": {
-        "x": 342,
-        "y": 34,
-        "w": 168,
-        "h": 30
+        "x": 2,
+        "y": 524,
+        "w": 334,
+        "h": 56
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 72,
-        "w": 168,
-        "h": 30
+        "x": 367,
+        "y": 145,
+        "w": 334,
+        "h": 56
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0030.png": {
       "frame": {
         "x": 2,
-        "y": 66,
-        "w": 168,
-        "h": 30
+        "y": 234,
+        "w": 334,
+        "h": 56
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 72,
-        "w": 168,
-        "h": 30
+        "x": 367,
+        "y": 145,
+        "w": 334,
+        "h": 56
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0031.png": {
       "frame": {
-        "x": 172,
-        "y": 66,
-        "w": 168,
-        "h": 30
+        "x": 2,
+        "y": 466,
+        "w": 334,
+        "h": 56
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 72,
-        "w": 168,
-        "h": 30
+        "x": 367,
+        "y": 145,
+        "w": 334,
+        "h": 56
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0032.png": {
       "frame": {
-        "x": 342,
-        "y": 66,
-        "w": 168,
-        "h": 30
+        "x": 2,
+        "y": 176,
+        "w": 334,
+        "h": 56
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 72,
-        "w": 168,
-        "h": 30
+        "x": 367,
+        "y": 145,
+        "w": 334,
+        "h": 56
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0033.png": {
       "frame": {
         "x": 2,
-        "y": 98,
-        "w": 168,
-        "h": 30
+        "y": 582,
+        "w": 334,
+        "h": 56
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 72,
-        "w": 168,
-        "h": 30
+        "x": 367,
+        "y": 145,
+        "w": 334,
+        "h": 56
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0034.png": {
       "frame": {
-        "x": 172,
-        "y": 98,
-        "w": 168,
-        "h": 30
+        "x": 2,
+        "y": 292,
+        "w": 334,
+        "h": 56
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 72,
-        "w": 168,
-        "h": 30
+        "x": 367,
+        "y": 145,
+        "w": 334,
+        "h": 56
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "death_28_0035.png": {
       "frame": {
-        "x": 342,
-        "y": 98,
-        "w": 168,
-        "h": 30
+        "x": 2,
+        "y": 60,
+        "w": 334,
+        "h": 56
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 183,
-        "y": 72,
-        "w": 168,
-        "h": 30
+        "x": 367,
+        "y": 145,
+        "w": 334,
+        "h": 56
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     }
   },
   "meta": {
-    "app": "plist-to-phaser-converter",
-    "version": "1.0",
     "image": "death_28.png",
     "format": "RGBA8888",
     "size": {
-      "w": 512,
-      "h": 1024
+      "w": 1024,
+      "h": 2048
     },
-    "scale": 1
+    "scale": "1"
   }
 }

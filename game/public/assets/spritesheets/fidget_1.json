@@ -2,214 +2,212 @@
   "frames": {
     "fidget_1_0001.png": {
       "frame": {
-        "x": 150,
-        "y": 104,
-        "w": 72,
-        "h": 50
+        "x": 296,
+        "y": 198,
+        "w": 144,
+        "h": 98
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 144,
-        "y": 46,
-        "w": 72,
-        "h": 50
+        "x": 288,
+        "y": 94,
+        "w": 144,
+        "h": 98
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "fidget_1_0002.png": {
       "frame": {
-        "x": 76,
-        "y": 106,
-        "w": 72,
-        "h": 50
+        "x": 2,
+        "y": 400,
+        "w": 142,
+        "h": 98
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 145,
-        "y": 47,
-        "w": 72,
-        "h": 50
+        "x": 290,
+        "y": 95,
+        "w": 142,
+        "h": 98
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "fidget_1_0003.png": {
       "frame": {
-        "x": 2,
-        "y": 156,
-        "w": 72,
-        "h": 50
+        "x": 146,
+        "y": 202,
+        "w": 142,
+        "h": 98
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 146,
-        "y": 48,
-        "w": 72,
-        "h": 50
+        "x": 292,
+        "y": 96,
+        "w": 142,
+        "h": 98
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "fidget_1_0004.png": {
       "frame": {
-        "x": 76,
-        "y": 54,
-        "w": 72,
-        "h": 50
+        "x": 150,
+        "y": 102,
+        "w": 144,
+        "h": 98
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 147,
-        "y": 49,
-        "w": 72,
-        "h": 50
+        "x": 294,
+        "y": 98,
+        "w": 144,
+        "h": 98
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "fidget_1_0005.png": {
       "frame": {
         "x": 2,
-        "y": 54,
-        "w": 72,
-        "h": 50
+        "y": 298,
+        "w": 142,
+        "h": 100
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 148,
-        "y": 49,
-        "w": 72,
-        "h": 50
+        "x": 296,
+        "y": 98,
+        "w": 142,
+        "h": 100
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "fidget_1_0006.png": {
       "frame": {
-        "x": 150,
-        "y": 156,
-        "w": 72,
-        "h": 50
+        "x": 2,
+        "y": 102,
+        "w": 146,
+        "h": 98
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 147,
-        "y": 49,
-        "w": 72,
-        "h": 50
+        "x": 294,
+        "y": 100,
+        "w": 146,
+        "h": 98
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "fidget_1_0007.png": {
       "frame": {
-        "x": 158,
-        "y": 52,
-        "w": 74,
-        "h": 50
+        "x": 310,
+        "y": 100,
+        "w": 148,
+        "h": 96
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 146,
-        "y": 50,
-        "w": 74,
-        "h": 50
+        "x": 292,
+        "y": 101,
+        "w": 148,
+        "h": 96
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "fidget_1_0008.png": {
       "frame": {
-        "x": 158,
+        "x": 310,
         "y": 2,
-        "w": 76,
-        "h": 48
+        "w": 150,
+        "h": 96
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 145,
-        "y": 51,
-        "w": 76,
-        "h": 48
+        "x": 290,
+        "y": 102,
+        "w": 150,
+        "h": 96
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "fidget_1_0009.png": {
       "frame": {
-        "x": 2,
+        "x": 156,
         "y": 2,
-        "w": 76,
-        "h": 50
+        "w": 152,
+        "h": 98
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 144,
-        "y": 50,
-        "w": 76,
-        "h": 50
+        "x": 288,
+        "y": 101,
+        "w": 152,
+        "h": 98
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     },
     "fidget_1_0010.png": {
       "frame": {
-        "x": 80,
+        "x": 2,
         "y": 2,
-        "w": 76,
-        "h": 50
+        "w": 152,
+        "h": 98
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 144,
-        "y": 50,
-        "w": 76,
-        "h": 50
+        "x": 288,
+        "y": 100,
+        "w": 152,
+        "h": 98
       },
       "sourceSize": {
-        "w": 400,
-        "h": 150
+        "w": 800,
+        "h": 300
       }
     }
   },
   "meta": {
-    "app": "plist-to-phaser-converter",
-    "version": "1.0",
     "image": "fidget_1.png",
     "format": "RGBA8888",
     "size": {
-      "w": 256,
-      "h": 256
+      "w": 512,
+      "h": 512
     },
-    "scale": 1
+    "scale": "1"
   }
 }
