@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { GAME_WIDTH, COLORS } from '../config/game-config';
+import { GAME_WIDTH, COLORS, FONT_FAMILY } from '../config/game-config';
 import { LEVELS } from '../config/levels';
 import { gameState } from '../utils/game-state';
 
@@ -12,9 +12,9 @@ export class LevelSelectScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor(COLORS.backgroundHex);
 
     // Title
-    this.add.text(GAME_WIDTH / 2, 30, '1 player', {
-      fontFamily: 'Arial',
-      fontSize: '16px',
+    this.add.text(GAME_WIDTH / 2, 30, '1 PLAYER', {
+      fontFamily: FONT_FAMILY,
+      fontSize: '18px',
       color: COLORS.textHex
     }).setOrigin(0.5);
 
@@ -86,16 +86,17 @@ export class LevelSelectScene extends Phaser.Scene {
 
     // Level name
     const nameText = this.add.text(0, 25, name.toLowerCase(), {
-      fontFamily: 'Arial',
+      fontFamily: FONT_FAMILY,
       fontSize: '10px',
       color: isUnlocked ? COLORS.textHex : COLORS.accentHex
     }).setOrigin(0.5);
     container.add(nameText);
 
-    // High score
+    // High score in seconds
     if (highScore) {
-      const scoreText = this.add.text(0, 35, `${highScore}ms`, {
-        fontFamily: 'Arial',
+      const seconds = (highScore / 1000).toFixed(2);
+      const scoreText = this.add.text(0, 36, `${seconds}s`, {
+        fontFamily: FONT_FAMILY,
         fontSize: '8px',
         color: COLORS.accentHex
       }).setOrigin(0.5);

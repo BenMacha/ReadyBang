@@ -18,10 +18,18 @@ export class BootScene extends Phaser.Scene {
     });
     loadingText.setOrigin(0.5);
 
+    // Load fonts first
+    this.loadFonts();
+    
     // Load all assets
     this.loadImages();
     this.loadSounds();
     this.loadSpritesheets();
+  }
+
+  private loadFonts(): void {
+    // Load western style font
+    this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
   }
 
   private loadImages(): void {
@@ -113,11 +121,27 @@ export class BootScene extends Phaser.Scene {
   }
 
   create(): void {
-    // Create all animations
-    this.createAnimations();
-    
-    // Go to menu
-    this.scene.start('MenuScene');
+    // Load Google Font for western style
+    const WebFont = (window as any).WebFont;
+    if (WebFont) {
+      WebFont.load({
+        google: {
+          families: ['Rye', 'Staatliches']
+        },
+        active: () => {
+          this.createAnimations();
+          this.scene.start('MenuScene');
+        },
+        inactive: () => {
+          // Font failed to load, continue anyway
+          this.createAnimations();
+          this.scene.start('MenuScene');
+        }
+      });
+    } else {
+      this.createAnimations();
+      this.scene.start('MenuScene');
+    }
   }
 
   private createAnimations(): void {

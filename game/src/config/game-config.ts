@@ -4,6 +4,9 @@ import Phaser from 'phaser';
 export const GAME_WIDTH = 320;
 export const GAME_HEIGHT = 480;
 
+// Western style font
+export const FONT_FAMILY = '"Rye", "Staatliches", "Georgia", serif';
+
 // Colors from the original game
 export const COLORS = {
   background: 0xf5f5f5,      // Light gray/white
@@ -35,6 +38,7 @@ export const gameConfig: Phaser.Types.Core.GameConfig = {
   },
   render: {
     pixelArt: false,
-    antialias: true
+    antialias: true,
+    roundPixels: true  // Sharper rendering
   }
 };

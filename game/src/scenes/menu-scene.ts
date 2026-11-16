@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { GAME_WIDTH, GAME_HEIGHT, COLORS } from '../config/game-config';
+import { GAME_WIDTH, GAME_HEIGHT, COLORS, FONT_FAMILY } from '../config/game-config';
 
 export class MenuScene extends Phaser.Scene {
   private menuCowboy!: Phaser.GameObjects.Sprite;
@@ -11,36 +11,35 @@ export class MenuScene extends Phaser.Scene {
   create(): void {
     this.cameras.main.setBackgroundColor(COLORS.backgroundHex);
 
-    // Title text - styled like original
+    // Title text - western style
     const titleY = 50;
     
-    this.add.text(GAME_WIDTH / 2, titleY, 'ready steady bang', {
-      fontFamily: 'Arial, sans-serif',
-      fontSize: '18px',
-      color: COLORS.accentHex,
-      fontStyle: 'normal'
+    this.add.text(GAME_WIDTH / 2, titleY, 'READY STEADY BANG', {
+      fontFamily: FONT_FAMILY,
+      fontSize: '20px',
+      color: COLORS.textHex
     }).setOrigin(0.5);
 
     // Animated cowboy in center
     this.createMenuCowboy();
 
-    // Menu buttons - moved up to avoid overlap with credits
+    // Menu buttons
     const buttonY = 280;
     const buttonSpacing = 50;
 
-    this.createMenuButton(GAME_WIDTH / 2, buttonY, '1 player', () => {
+    this.createMenuButton(GAME_WIDTH / 2, buttonY, '1 PLAYER', () => {
       this.scene.start('LevelSelectScene');
     });
 
-    this.createMenuButton(GAME_WIDTH / 2, buttonY + buttonSpacing, '2 player', () => {
+    this.createMenuButton(GAME_WIDTH / 2, buttonY + buttonSpacing, '2 PLAYER', () => {
       this.scene.start('GameScene', { mode: 'multiplayer' });
     });
 
-    this.createMenuButton(GAME_WIDTH / 2, buttonY + buttonSpacing * 2, 'kill gallery', () => {
+    this.createMenuButton(GAME_WIDTH / 2, buttonY + buttonSpacing * 2, 'KILL GALLERY', () => {
       this.scene.start('KillGalleryScene');
     });
 
-    // Credits at bottom - more space from buttons
+    // Credits at bottom
     this.add.text(GAME_WIDTH / 2, GAME_HEIGHT - 15, 'by BEN MECHA - benmacha.tn', {
       fontFamily: 'Arial, sans-serif',
       fontSize: '9px',
@@ -50,10 +49,8 @@ export class MenuScene extends Phaser.Scene {
   }
 
   private createMenuCowboy(): void {
-    // Position cowboy in center
     const cowboyY = 160;
 
-    // Use stand_1 spritesheet - single frame, no animation glitch
     if (this.textures.exists('stand_1')) {
       this.menuCowboy = this.add.sprite(GAME_WIDTH / 2, cowboyY, 'stand_1');
       const frames = this.textures.get('stand_1').getFrameNames().sort();
@@ -62,7 +59,6 @@ export class MenuScene extends Phaser.Scene {
       }
       this.menuCowboy.setOrigin(0.5, 0.5);
     } else {
-      // Fallback: gray rectangle placeholder
       this.add.rectangle(GAME_WIDTH / 2, cowboyY, 60, 80, COLORS.primary);
     }
   }
@@ -70,20 +66,17 @@ export class MenuScene extends Phaser.Scene {
   private createMenuButton(x: number, y: number, text: string, callback: () => void): void {
     const container = this.add.container(x, y);
 
-    // Button background - try to use original asset
     let bg: Phaser.GameObjects.Image | Phaser.GameObjects.Rectangle;
     
     if (this.textures.exists('btn_menu_bg')) {
       bg = this.add.image(0, 0, 'btn_menu_bg');
     } else {
-      // Fallback rectangle
       bg = this.add.rectangle(0, 0, 150, 40, 0x444444);
       (bg as Phaser.GameObjects.Rectangle).setStrokeStyle(1, 0x333333);
     }
 
-    // Button text - white on dark background
     const label = this.add.text(0, 0, text, {
-      fontFamily: 'Arial, sans-serif',
+      fontFamily: FONT_FAMILY,
       fontSize: '14px',
       color: '#ffffff'
     });
@@ -93,7 +86,6 @@ export class MenuScene extends Phaser.Scene {
     container.setSize(150, 40);
     container.setInteractive({ useHandCursor: true });
 
-    // Hover/press effects
     container.on('pointerover', () => {
       if (this.textures.exists('btn_menu_bg_sel')) {
         (bg as Phaser.GameObjects.Image).setTexture('btn_menu_bg_sel');

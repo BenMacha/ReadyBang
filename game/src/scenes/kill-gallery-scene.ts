@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { GAME_WIDTH, GAME_HEIGHT, COLORS } from '../config/game-config';
+import { GAME_WIDTH, GAME_HEIGHT, COLORS, FONT_FAMILY } from '../config/game-config';
 import { DEATH_ANIMATIONS } from '../config/animations';
 import { gameState } from '../utils/game-state';
 
@@ -20,9 +20,9 @@ export class KillGalleryScene extends Phaser.Scene {
     this.currentIndex = 0;
 
     // Title
-    this.add.text(GAME_WIDTH / 2, 25, 'kill gallery', {
-      fontFamily: 'Arial',
-      fontSize: '16px',
+    this.add.text(GAME_WIDTH / 2, 25, 'KILL GALLERY', {
+      fontFamily: FONT_FAMILY,
+      fontSize: '18px',
       color: COLORS.textHex
     }).setOrigin(0.5);
 
@@ -38,21 +38,21 @@ export class KillGalleryScene extends Phaser.Scene {
 
     // Death name
     this.nameText = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT - 100, '', {
-      fontFamily: 'Arial',
-      fontSize: '14px',
+      fontFamily: FONT_FAMILY,
+      fontSize: '16px',
       color: COLORS.textHex
     }).setOrigin(0.5);
 
     // Death description
     this.descText = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT - 80, '', {
-      fontFamily: 'Arial',
+      fontFamily: 'Arial, sans-serif',
       fontSize: '10px',
       color: COLORS.accentHex
     }).setOrigin(0.5);
 
     // Counter
     this.counterText = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT - 50, '', {
-      fontFamily: 'Arial',
+      fontFamily: FONT_FAMILY,
       fontSize: '10px',
       color: COLORS.accentHex
     }).setOrigin(0.5);
@@ -129,17 +129,18 @@ export class KillGalleryScene extends Phaser.Scene {
 
     // Update texts
     if (isUnlocked) {
-      this.nameText.setText(death.name);
+      this.nameText.setText(death.name.toUpperCase());
       this.descText.setText(death.description);
       this.lockIcon.setVisible(false);
       this.cowboySprite.setVisible(true);
       
       // Set to stand pose
-      if (this.anims.exists('stand')) {
-        this.cowboySprite.play('stand');
+      const frames = this.textures.get('stand_1').getFrameNames().sort();
+      if (frames.length > 0) {
+        this.cowboySprite.setTexture('stand_1', frames[0]);
       }
     } else {
-      this.nameText.setText('unseen');
+      this.nameText.setText('UNSEEN');
       this.descText.setText(`requires gun level ${death.gunLevel}`);
       this.lockIcon.setVisible(true);
       this.cowboySprite.setVisible(false);
@@ -157,7 +158,21 @@ export class KillGalleryScene extends Phaser.Scene {
     if (!isUnlocked) return;
 
     const animKey = death.id;
+    const atlasKey = death.id;
     
+    // Create animation if needed
+    if (!this.anims.exists(animKey) && this.textures.exists(atlasKey)) {
+      const frames = this.textures.get(atlasKey).getFrameNames().sort();
+      if (frames.length > 0) {
+        this.anims.create({
+          key: animKey,
+          frames: frames.map(f => ({ key: atlasKey, frame: f })),
+          frameRate: 24,
+          repeat: 0
+        });
+      }
+    }
+
     if (this.anims.exists(animKey)) {
       this.cowboySprite.play(animKey);
       
@@ -169,8 +184,9 @@ export class KillGalleryScene extends Phaser.Scene {
 
       // Return to stand when done
       this.cowboySprite.once('animationcomplete', () => {
-        if (this.anims.exists('stand')) {
-          this.cowboySprite.play('stand');
+        const frames = this.textures.get('stand_1').getFrameNames().sort();
+        if (frames.length > 0) {
+          this.cowboySprite.setTexture('stand_1', frames[0]);
         }
       });
     }
