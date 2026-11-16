@@ -5,6 +5,7 @@ import { MenuScene } from './scenes/menu-scene';
 import { GameScene } from './scenes/game-scene';
 import { LevelSelectScene } from './scenes/level-select-scene';
 import { KillGalleryScene } from './scenes/kill-gallery-scene';
+import { MultiplayerSetupScene } from './scenes/multiplayer-setup-scene';
 
 const config: Phaser.Types.Core.GameConfig = {
   ...gameConfig,
@@ -12,6 +13,7 @@ const config: Phaser.Types.Core.GameConfig = {
     BootScene,
     MenuScene,
     LevelSelectScene,
+    MultiplayerSetupScene,
     GameScene,
     KillGalleryScene
   ]

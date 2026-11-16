@@ -36,12 +36,15 @@ export class BootScene extends Phaser.Scene {
     // Splash/Default screens
     this.load.image('splash', 'assets/images/Default.png');
     
-    // Phase text images
-    this.load.image('bang', 'assets/images/bang.png');
-    this.load.image('ready_img', 'assets/images/ready.png');
-    this.load.image('steady_img', 'assets/images/steady.png');
-    this.load.image('win_img', 'assets/images/win.png');
-    this.load.image('lose_img', 'assets/images/Lose.png');
+    // Phase text images (pixel art style from original)
+    this.load.image('img_ready', 'assets/images/ready.png');
+    this.load.image('img_steady', 'assets/images/steady.png');
+    this.load.image('img_bang', 'assets/images/bang.png');
+    this.load.image('img_lose', 'assets/images/lose.png');
+    
+    // Tick/checkbox for multiplayer
+    this.load.image('tick', 'assets/images/tick.png');
+    this.load.image('tickSel', 'assets/images/tickSel.png');
 
     // UI elements
     this.load.image('btn_menu_bg', 'assets/images/menuButtonBg.png');

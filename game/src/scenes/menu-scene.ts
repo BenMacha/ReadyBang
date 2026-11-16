@@ -32,7 +32,7 @@ export class MenuScene extends Phaser.Scene {
     });
 
     this.createMenuButton(GAME_WIDTH / 2, buttonY + buttonSpacing, '2 PLAYER', () => {
-      this.scene.start('GameScene', { mode: 'multiplayer' });
+      this.scene.start('MultiplayerSetupScene');
     });
 
     this.createMenuButton(GAME_WIDTH / 2, buttonY + buttonSpacing * 2, 'KILL GALLERY', () => {

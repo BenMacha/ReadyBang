@@ -8,12 +8,14 @@ type GamePhase = 'intro' | 'ready' | 'steady' | 'waiting' | 'bang' | 'shooting' 
 interface GameSceneData {
   mode: 'singleplayer' | 'multiplayer';
   levelId?: number;
+  targetScore?: number;
 }
 
 export class GameScene extends Phaser.Scene {
   private mode: 'singleplayer' | 'multiplayer' = 'singleplayer';
   private level: LevelConfig | null = null;
   private phase: GamePhase = 'intro';
+  private targetScore: number = 5;
   
   // Timing
   private bangTime: number = 0;
@@ -23,8 +25,9 @@ export class GameScene extends Phaser.Scene {
   // Game objects
   private playerCowboy!: Phaser.GameObjects.Sprite;
   private opponentCowboy!: Phaser.GameObjects.Sprite;
-  private phaseText!: Phaser.GameObjects.Text;
+  private phaseImage!: Phaser.GameObjects.Image;
   private dividerLine!: Phaser.GameObjects.Graphics;
+  private homeButton!: Phaser.GameObjects.Container;
   
   // Score display
   private playerScoreText!: Phaser.GameObjects.Text;
@@ -32,9 +35,13 @@ export class GameScene extends Phaser.Scene {
   private playerScore: number = 0;
   private opponentScore: number = 0;
   
+  // Result UI
+  private resultContainer!: Phaser.GameObjects.Container;
+  
   // Flags
   private playerTapped: boolean = false;
   private opponentTapped: boolean = false;
+  private roundEnded: boolean = false;
 
   constructor() {
     super({ key: 'GameScene' });
@@ -42,6 +49,7 @@ export class GameScene extends Phaser.Scene {
 
   init(data: GameSceneData): void {
     this.mode = data.mode || 'singleplayer';
+    this.targetScore = data.targetScore || 5;
     
     if (this.mode === 'singleplayer' && data.levelId) {
       this.level = LEVELS.find(l => l.id === data.levelId) || LEVELS[0];
@@ -56,25 +64,23 @@ export class GameScene extends Phaser.Scene {
     this.opponentShootTime = 0;
     this.playerScore = 0;
     this.opponentScore = 0;
+    this.roundEnded = false;
   }
 
   create(): void {
     this.cameras.main.setBackgroundColor(COLORS.backgroundHex);
 
-    // Draw dotted divider line
+    // Home button (top left)
+    this.createHomeButton();
+
+    // Draw dotted divider line with score marks
     this.createDividerLine();
 
     // Create cowboys
     this.createCowboys();
 
-    // Phase text (READY, STEADY, BANG!)
-    this.phaseText = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT / 2, '', {
-      fontFamily: FONT_FAMILY,
-      fontSize: '28px',
-      color: COLORS.textHex
-    });
-    this.phaseText.setOrigin(0.5);
-    this.phaseText.setDepth(100);
+    // Phase image (READY, STEADY, BANG!)
+    this.createPhaseImage();
 
     // Score display
     this.createScoreDisplay();
@@ -86,9 +92,48 @@ export class GameScene extends Phaser.Scene {
     this.time.delayedCall(500, () => this.startRound());
   }
 
+  private createHomeButton(): void {
+    this.homeButton = this.add.container(25, 25);
+    
+    let bg: Phaser.GameObjects.Image | Phaser.GameObjects.Arc;
+    if (this.textures.exists('btn_back')) {
+      bg = this.add.image(0, 0, 'btn_back');
+    } else {
+      bg = this.add.circle(0, 0, 12, 0x999999);
+      const icon = this.add.text(0, 0, '⌂', { fontSize: '14px', color: '#fff' }).setOrigin(0.5);
+      this.homeButton.add(icon);
+    }
+    
+    this.homeButton.add(bg);
+    this.homeButton.setSize(24, 24);
+    this.homeButton.setInteractive({ useHandCursor: true });
+    this.homeButton.setDepth(200);
+
+    this.homeButton.on('pointerup', () => {
+      this.playSound('snd_back');
+      if (this.mode === 'singleplayer') {
+        this.scene.start('LevelSelectScene');
+      } else {
+        this.scene.start('MultiplayerSetupScene');
+      }
+    });
+  }
+
+  private createPhaseImage(): void {
+    // Use original images if available
+    if (this.textures.exists('ready_img')) {
+      this.phaseImage = this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, 'ready_img');
+    } else {
+      // Fallback to text-based
+      this.phaseImage = this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, '__DEFAULT');
+    }
+    this.phaseImage.setVisible(false);
+    this.phaseImage.setDepth(100);
+  }
+
   private createDividerLine(): void {
     this.dividerLine = this.add.graphics();
-    this.dividerLine.lineStyle(1, COLORS.divider, 0.5);
+    this.dividerLine.lineStyle(1, COLORS.divider, 0.6);
     
     const y = GAME_HEIGHT / 2;
     const dashLength = 6;
@@ -102,6 +147,12 @@ export class GameScene extends Phaser.Scene {
     }
     this.dividerLine.strokePath();
     this.dividerLine.setDepth(10);
+
+    // Add score divider image if available
+    if (this.textures.exists('scoreboard_divider')) {
+      const divider = this.add.image(25, GAME_HEIGHT / 2, 'scoreboard_divider');
+      divider.setDepth(11);
+    }
   }
 
   private createCowboys(): void {
@@ -130,29 +181,39 @@ export class GameScene extends Phaser.Scene {
   }
 
   private createScoreDisplay(): void {
-    // ME label and score (bottom half)
-    this.add.text(15, GAME_HEIGHT / 2 + 15, 'ME', {
+    const scoreX = 20;
+    
+    // Target score indicator
+    const targetText = this.mode === 'multiplayer' ? `first to ${this.targetScore}` : 'first to 5';
+    this.add.text(GAME_WIDTH - 10, GAME_HEIGHT / 2, targetText, {
+      fontFamily: FONT_FAMILY,
+      fontSize: '8px',
+      color: COLORS.accentHex
+    }).setOrigin(1, 0.5).setAngle(90);
+
+    // HIM label and score (top half)
+    this.add.text(scoreX, GAME_HEIGHT / 2 - 45, 'HIM', {
       fontFamily: FONT_FAMILY,
       fontSize: '10px',
       color: COLORS.accentHex
     });
 
-    this.playerScoreText = this.add.text(15, GAME_HEIGHT / 2 + 28, '0', {
+    this.opponentScoreText = this.add.text(scoreX, GAME_HEIGHT / 2 - 30, '0', {
       fontFamily: FONT_FAMILY,
-      fontSize: '20px',
+      fontSize: '24px',
       color: COLORS.textHex
     });
 
-    // HIM label and score (top half)
-    this.add.text(15, GAME_HEIGHT / 2 - 45, 'HIM', {
+    // ME label and score (bottom half)
+    this.add.text(scoreX, GAME_HEIGHT / 2 + 12, 'ME', {
       fontFamily: FONT_FAMILY,
       fontSize: '10px',
       color: COLORS.accentHex
     });
 
-    this.opponentScoreText = this.add.text(15, GAME_HEIGHT / 2 - 32, '0', {
+    this.playerScoreText = this.add.text(scoreX, GAME_HEIGHT / 2 + 25, '0', {
       fontFamily: FONT_FAMILY,
-      fontSize: '20px',
+      fontSize: '24px',
       color: COLORS.textHex
     });
   }
@@ -174,6 +235,12 @@ export class GameScene extends Phaser.Scene {
   private startRound(): void {
     this.playerTapped = false;
     this.opponentTapped = false;
+    this.roundEnded = false;
+
+    // Hide result UI if visible
+    if (this.resultContainer) {
+      this.resultContainer.destroy();
+    }
 
     // Reset cowboys to stand
     this.resetCowboyToStand(this.playerCowboy);
@@ -181,20 +248,22 @@ export class GameScene extends Phaser.Scene {
 
     // READY phase
     this.phase = 'ready';
-    this.showPhaseText('READY');
+    this.showPhaseImage('ready');
     this.playSound('snd_ready');
 
     this.time.delayedCall(1000, () => {
+      if (this.roundEnded) return;
+      
       // STEADY phase
       this.phase = 'steady';
-      this.showPhaseText('STEADY');
+      this.showPhaseImage('steady');
       this.playSound('snd_steady');
 
       // Random delay before BANG
       const delay = Phaser.Math.Between(STEADY_DELAY_MIN, STEADY_DELAY_MAX);
       
       this.time.delayedCall(delay, () => {
-        if (this.phase === 'steady') {
+        if (this.phase === 'steady' && !this.roundEnded) {
           this.triggerBang();
         }
       });
@@ -205,13 +274,13 @@ export class GameScene extends Phaser.Scene {
     this.phase = 'bang';
     this.bangTime = this.time.now;
     
-    this.showPhaseText('BANG!');
+    this.showPhaseImage('bang');
     this.playSound('snd_bang');
 
     // AI shoots after draw speed (singleplayer)
     if (this.mode === 'singleplayer' && this.level) {
       this.time.delayedCall(this.level.drawSpeed * 1000, () => {
-        if (!this.playerTapped && this.phase === 'bang') {
+        if (!this.playerTapped && this.phase === 'bang' && !this.roundEnded) {
           this.onOpponentShoot();
         }
       });
@@ -219,24 +288,22 @@ export class GameScene extends Phaser.Scene {
 
     // Timeout after 3 seconds
     this.time.delayedCall(3000, () => {
-      if (this.phase === 'bang') {
+      if (this.phase === 'bang' && !this.roundEnded) {
         this.endRound('timeout');
       }
     });
   }
 
   private onPlayerTap(): void {
-    if (this.playerTapped) return;
+    if (this.playerTapped || this.roundEnded) return;
     this.playerTapped = true;
     this.playerShootTime = this.time.now;
 
     if (this.phase === 'ready' || this.phase === 'steady') {
-      // Too early - coward!
       this.playCowboyAnim(this.playerCowboy, 'coward');
       this.playSound('snd_miss');
       this.endRound('player_early');
     } else if (this.phase === 'bang') {
-      // Valid shot
       this.playCowboyAnim(this.playerCowboy, 'shoot');
       this.playSound('snd_gunshot');
       
@@ -250,14 +317,13 @@ export class GameScene extends Phaser.Scene {
           });
         }
       } else {
-        // Multiplayer: check if opponent already shot
         this.checkMultiplayerResult();
       }
     }
   }
 
   private onOpponentTap(): void {
-    if (this.opponentTapped || this.mode !== 'multiplayer') return;
+    if (this.opponentTapped || this.mode !== 'multiplayer' || this.roundEnded) return;
     this.opponentTapped = true;
     this.opponentShootTime = this.time.now;
 
@@ -273,7 +339,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   private onOpponentShoot(): void {
-    if (this.phase !== 'bang') return;
+    if (this.phase !== 'bang' || this.roundEnded) return;
     
     this.opponentTapped = true;
     this.opponentShootTime = this.time.now;
@@ -288,20 +354,16 @@ export class GameScene extends Phaser.Scene {
   }
 
   private checkMultiplayerResult(): void {
-    // In multiplayer, first to shoot wins (if during bang phase)
-    if (this.mode === 'multiplayer' && this.phase === 'bang') {
+    if (this.mode === 'multiplayer' && this.phase === 'bang' && !this.roundEnded) {
       if (this.playerTapped && !this.opponentTapped) {
-        // Player shot first, opponent hasn't shot yet - player wins
         this.time.delayedCall(200, () => {
           this.endRound('player_wins', this.playerShootTime - this.bangTime);
         });
       } else if (this.opponentTapped && !this.playerTapped) {
-        // Opponent shot first, player hasn't shot yet - opponent wins
         this.time.delayedCall(200, () => {
           this.endRound('opponent_wins', this.opponentShootTime - this.bangTime);
         });
       } else if (this.playerTapped && this.opponentTapped) {
-        // Both shot - compare times
         if (this.playerShootTime <= this.opponentShootTime) {
           this.endRound('player_wins', this.playerShootTime - this.bangTime);
         } else {
@@ -312,10 +374,11 @@ export class GameScene extends Phaser.Scene {
   }
 
   private endRound(result: string, reactionTime?: number): void {
+    if (this.roundEnded) return;
+    this.roundEnded = true;
     this.phase = 'result';
-    this.phaseText.setVisible(false);
+    this.phaseImage.setVisible(false);
 
-    // Pick random death animation
     const deathIndex = Phaser.Math.Between(1, 31);
     const deathAnim = `death_${deathIndex}`;
 
@@ -328,16 +391,8 @@ export class GameScene extends Phaser.Scene {
         this.playerScore++;
         this.playerScoreText.setText(this.playerScore.toString());
         
-        this.showResultText('WIN!', '#4CAF50');
-        
         if (this.mode === 'singleplayer') {
           gameState.unlockDeath(`death_${deathIndex}`);
-          if (this.level && this.level.id < 10) {
-            gameState.unlockLevel(this.level.id + 1);
-          }
-          if (reactionTime && this.level) {
-            gameState.recordHighScore(this.level.id, reactionTime);
-          }
         }
         break;
 
@@ -348,78 +403,164 @@ export class GameScene extends Phaser.Scene {
         this.playSound(`snd_death_${deathIndex}`);
         this.opponentScore++;
         this.opponentScoreText.setText(this.opponentScore.toString());
-        
-        this.showResultText('LOSE', '#f44336');
         break;
 
       case 'player_early':
         this.playCowboyAnim(this.opponentCowboy, 'angry');
         this.opponentScore++;
         this.opponentScoreText.setText(this.opponentScore.toString());
-        this.showResultText('TOO EARLY!', '#ff9800');
         break;
 
       case 'opponent_early':
         this.playCowboyAnim(this.playerCowboy, 'angry');
         this.playerScore++;
         this.playerScoreText.setText(this.playerScore.toString());
-        this.showResultText('TOO EARLY!', '#ff9800');
-        break;
-        
-      case 'timeout':
-        this.showResultText('TIMEOUT', '#ff9800');
         break;
     }
 
-    // Show reaction time in seconds (0.00s format)
-    if (reactionTime) {
-      this.time.delayedCall(500, () => {
-        const seconds = (reactionTime / 1000).toFixed(2);
-        this.add.text(GAME_WIDTH / 2, GAME_HEIGHT / 2 + 45, `${seconds}s`, {
-          fontFamily: FONT_FAMILY,
-          fontSize: '18px',
-          color: COLORS.textHex
-        }).setOrigin(0.5).setDepth(200);
+    // Check if game is over
+    const targetScore = this.mode === 'singleplayer' ? 5 : this.targetScore;
+    const gameOver = this.playerScore >= targetScore || this.opponentScore >= targetScore;
+    const playerWonGame = this.playerScore >= targetScore;
+
+    // Show result UI after delay
+    this.time.delayedCall(1500, () => {
+      this.showResultUI(result, reactionTime, gameOver, playerWonGame);
+    });
+  }
+
+  private showResultUI(result: string, reactionTime: number | undefined, gameOver: boolean, playerWonGame: boolean): void {
+    this.resultContainer = this.add.container(GAME_WIDTH / 2, GAME_HEIGHT / 2);
+    this.resultContainer.setDepth(150);
+
+    // Background overlay
+    const overlay = this.add.rectangle(0, 0, GAME_WIDTH, 120, 0xffffff, 0.95);
+    this.resultContainer.add(overlay);
+
+    // Result text
+    let resultText = '';
+    let resultColor = COLORS.textHex;
+    
+    if (gameOver) {
+      resultText = playerWonGame ? 'YOU WIN!' : 'YOU LOSE';
+      resultColor = playerWonGame ? '#4CAF50' : '#f44336';
+    } else {
+      if (result === 'player_wins') {
+        resultText = 'WIN';
+        resultColor = '#4CAF50';
+      } else if (result === 'opponent_wins') {
+        resultText = 'LOSE';
+        resultColor = '#f44336';
+      } else if (result === 'player_early' || result === 'opponent_early') {
+        resultText = 'TOO EARLY!';
+        resultColor = '#ff9800';
+      } else {
+        resultText = 'TIMEOUT';
+        resultColor = '#ff9800';
+      }
+    }
+
+    const mainText = this.add.text(0, -30, resultText, {
+      fontFamily: FONT_FAMILY,
+      fontSize: gameOver ? '28px' : '24px',
+      color: resultColor
+    }).setOrigin(0.5);
+    this.resultContainer.add(mainText);
+
+    // Reaction time (if available)
+    if (reactionTime && (result === 'player_wins' || result === 'opponent_wins')) {
+      const seconds = (reactionTime / 1000).toFixed(2);
+      const timeText = this.add.text(0, 0, `${seconds}s`, {
+        fontFamily: FONT_FAMILY,
+        fontSize: '16px',
+        color: COLORS.accentHex
+      }).setOrigin(0.5);
+      this.resultContainer.add(timeText);
+    }
+
+    // Buttons
+    if (gameOver) {
+      // Game over - show menu button and replay
+      if (this.mode === 'singleplayer' && playerWonGame && this.level && this.level.id < 10) {
+        gameState.unlockLevel(this.level.id + 1);
+        if (reactionTime) {
+          gameState.recordHighScore(this.level.id, reactionTime);
+        }
+        
+        // Next cowboy button
+        this.createResultButton(-50, 35, 'NEXT', () => {
+          this.scene.start('GameScene', {
+            mode: 'singleplayer',
+            levelId: this.level!.id + 1
+          });
+        });
+        
+        // Replay button
+        this.createResultButton(50, 35, 'REPLAY', () => {
+          this.scene.restart();
+        });
+      } else {
+        // Just replay button
+        this.createResultButton(0, 35, 'REPLAY', () => {
+          this.scene.restart();
+        });
+      }
+    } else {
+      // Round not over - auto continue or show next button
+      const promptText = this.add.text(0, 25, 'tap to continue', {
+        fontFamily: FONT_FAMILY,
+        fontSize: '12px',
+        color: COLORS.accentHex
+      }).setOrigin(0.5);
+      this.resultContainer.add(promptText);
+
+      // Tap anywhere to continue
+      this.input.once('pointerdown', () => {
+        this.startRound();
       });
     }
-
-    // Next round or back to menu
-    this.time.delayedCall(3000, () => {
-      if (this.mode === 'multiplayer') {
-        this.scene.restart();
-      } else {
-        this.scene.start('LevelSelectScene');
-      }
-    });
   }
 
-  private showPhaseText(text: string): void {
-    this.phaseText.setText(text);
-    this.phaseText.setVisible(true);
-    this.phaseText.setScale(0);
+  private createResultButton(x: number, y: number, text: string, callback: () => void): void {
+    const btn = this.add.container(x, y);
     
-    this.tweens.add({
-      targets: this.phaseText,
-      scale: 1,
-      duration: 100,
-      ease: 'Back.easeOut'
-    });
-  }
-  
-  private showResultText(text: string, color: string): void {
-    const resultText = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT / 2, text, {
+    const bg = this.add.rectangle(0, 0, 80, 30, 0x444444, 1);
+    bg.setStrokeStyle(1, 0x333333);
+    
+    const label = this.add.text(0, 0, text, {
       fontFamily: FONT_FAMILY,
-      fontSize: '32px',
-      color: color
-    }).setOrigin(0.5).setDepth(200);
-    
-    resultText.setScale(0);
-    this.tweens.add({
-      targets: resultText,
-      scale: 1,
-      duration: 200,
-      ease: 'Back.easeOut'
+      fontSize: '12px',
+      color: '#ffffff'
+    }).setOrigin(0.5);
+
+    btn.add([bg, label]);
+    btn.setSize(80, 30);
+    btn.setInteractive({ useHandCursor: true });
+
+    btn.on('pointerup', () => {
+      this.playSound('snd_click');
+      callback();
     });
+
+    this.resultContainer.add(btn);
+  }
+
+  private showPhaseImage(phase: string): void {
+    // Use original pixel art images
+    const imageKey = `img_${phase}`;
+    
+    if (this.textures.exists(imageKey)) {
+      this.phaseImage.setTexture(imageKey);
+      this.phaseImage.setVisible(true);
+      this.phaseImage.setScale(0);
+      
+      this.tweens.add({
+        targets: this.phaseImage,
+        scale: 1.5,
+        duration: 100,
+        ease: 'Back.easeOut'
+      });
+    }
   }
 
   private resetCowboyToStand(cowboy: Phaser.GameObjects.Sprite): void {
