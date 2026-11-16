@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+
+	<!-- Gold -->
+	<key>goldBullet</key>
+	<string>CgkIofmr0MQOEAIQAw</string>
+
+	<!-- Silver -->
+	<key>silverBullet</key>
+	<string>CgkIofmr0MQOEAIQBQ</string>
+
+	<!-- Bronze -->
+	<key>bronzeBullet</key>
+	<string>CgkIofmr0MQOEAIQBg</string>
+
+	<!-- Badge -->
+	<key>sheriffBadge</key>
+	<string>CgkIofmr0MQOEAIQBw</string>
+
+	<!-- Wanted -->
+	<key>wanted</key>
+	<string>CgkIofmr0MQOEAIQEg</string>
+
+	<!-- Grave -->
+	<key>grave</key>
+	<string>CgkIofmr0MQOEAIQEw</string>
+
+	<!-- Gun1 "Snubby"-->
+	<key>gun1</key>
+	<string>CgkIofmr0MQOEAIQBA</string>
+
+	<!-- Gun2 -->
+	<key>gun2</key>
+	<string>CgkIofmr0MQOEAIQCA</string>
+
+	<!-- Gun3 -->
+	<key>gun3</key>
+	<string>CgkIofmr0MQOEAIQCQ</string>
+
+	<!-- Gun4 -->
+	<key>gun4</key>
+	<string>CgkIofmr0MQOEAIQCg</string>
+
+	<!-- Gun5 -->
+	<key>gun5</key>
+	<string>CgkIofmr0MQOEAIQCw</string>
+
+	<!-- Achievement 1 -->
+	<key>ach1</key>
+	<string>CgkIofmr0MQOEAIQDA</string>
+
+	<!-- Gossip -->
+	<key>gossip</key>
+	<string>CgkIofmr0MQOEAIQDQ</string>
+
+	<!-- Achievement 3 -->
+	<key>ach3</key>
+	<string>CgkIofmr0MQOEAIQDg</string>
+
+	<!-- Achievement 4 -->
+	<key>ach4</key>
+	<string>CgkIofmr0MQOEAIQDw</string>
+
+	<!-- Achievement 5 -->
+	<key>ach5</key>
+	<string>CgkIofmr0MQOEAIQEA</string>	
+
+	<!-- Cowboy Kill -->
+	<key>cowboyKill</key>
+	<string>CgkIofmr0MQOEAIQEQ</string>
+
+</dict>
+</plist>

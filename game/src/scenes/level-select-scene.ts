@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { GAME_WIDTH, GAME_HEIGHT } from '../config/game-config';
+import { GAME_WIDTH, GAME_HEIGHT, COLORS } from '../config/game-config';
 import { LEVELS } from '../config/levels';
 import { gameState } from '../utils/game-state';
 
@@ -9,13 +9,13 @@ export class LevelSelectScene extends Phaser.Scene {
   }
 
   create(): void {
-    this.cameras.main.setBackgroundColor('#c4956a');
+    this.cameras.main.setBackgroundColor(COLORS.backgroundHex);
 
     // Title
-    this.add.text(GAME_WIDTH / 2, 40, 'SELECT LEVEL', {
-      fontSize: '28px',
-      fontFamily: 'Arial Black',
-      color: '#2c1810'
+    this.add.text(GAME_WIDTH / 2, 30, '1 player', {
+      fontFamily: 'Arial',
+      fontSize: '16px',
+      color: COLORS.textHex
     }).setOrigin(0.5);
 
     // Back button
@@ -26,28 +26,32 @@ export class LevelSelectScene extends Phaser.Scene {
   }
 
   private createBackButton(): void {
-    const btn = this.add.container(40, 40);
+    const btn = this.add.container(30, 30);
     
-    const bg = this.add.circle(0, 0, 25, 0x2c1810);
-    const text = this.add.text(0, 0, '←', {
-      fontSize: '24px',
-      color: '#d4a574'
-    }).setOrigin(0.5);
-
-    btn.add([bg, text]);
-    btn.setSize(50, 50);
+    let bg: Phaser.GameObjects.Image | Phaser.GameObjects.Arc;
+    if (this.textures.exists('btn_back')) {
+      bg = this.add.image(0, 0, 'btn_back');
+    } else {
+      bg = this.add.circle(0, 0, 15, COLORS.accent);
+    }
+    
+    btn.add(bg);
+    btn.setSize(30, 30);
     btn.setInteractive({ useHandCursor: true });
 
     btn.on('pointerup', () => {
+      if (this.cache.audio.exists('snd_back')) {
+        this.sound.play('snd_back');
+      }
       this.scene.start('MenuScene');
     });
   }
 
   private createLevelGrid(): void {
-    const startY = 100;
+    const startY = 70;
     const cols = 2;
     const cellWidth = GAME_WIDTH / cols;
-    const cellHeight = 80;
+    const cellHeight = 75;
 
     LEVELS.forEach((level, index) => {
       const col = index % cols;
@@ -66,58 +70,61 @@ export class LevelSelectScene extends Phaser.Scene {
 
     const container = this.add.container(x, y);
 
-    // Background
-    const bg = this.add.rectangle(0, 0, 140, 60, isUnlocked ? 0x2c1810 : 0x666666);
-    bg.setStrokeStyle(2, 0x1a0f0a);
+    // Level preview image
+    const bgKey = `level${levelId}`;
+    if (this.textures.exists(bgKey)) {
+      const preview = this.add.image(0, -5, bgKey);
+      preview.setScale(0.8);
+      if (!isUnlocked) {
+        preview.setTint(0x666666);
+      }
+      container.add(preview);
+    } else {
+      const placeholder = this.add.rectangle(0, -5, 100, 40, isUnlocked ? 0xdddddd : 0x999999);
+      container.add(placeholder);
+    }
 
-    // Level number
-    const levelNum = this.add.text(-50, -10, `${levelId}`, {
-      fontSize: '24px',
-      fontFamily: 'Arial Black',
-      color: isUnlocked ? '#d4a574' : '#999999'
-    }).setOrigin(0.5);
-
-    // Name
-    const nameText = this.add.text(10, -10, name, {
-      fontSize: '12px',
+    // Level name
+    const nameText = this.add.text(0, 25, name.toLowerCase(), {
       fontFamily: 'Arial',
-      color: isUnlocked ? '#d4a574' : '#999999'
-    }).setOrigin(0, 0.5);
+      fontSize: '10px',
+      color: isUnlocked ? COLORS.textHex : COLORS.accentHex
+    }).setOrigin(0.5);
+    container.add(nameText);
 
-    container.add([bg, levelNum, nameText]);
-
-    // High score if exists
+    // High score
     if (highScore) {
-      const scoreText = this.add.text(10, 10, `Best: ${highScore}ms`, {
-        fontSize: '10px',
+      const scoreText = this.add.text(0, 35, `${highScore}ms`, {
         fontFamily: 'Arial',
-        color: '#aaa'
-      }).setOrigin(0, 0.5);
+        fontSize: '8px',
+        color: COLORS.accentHex
+      }).setOrigin(0.5);
       container.add(scoreText);
     }
 
-    // Locked icon
+    // Lock icon
     if (!isUnlocked) {
-      const lock = this.add.text(50, 0, '🔒', {
-        fontSize: '20px'
-      }).setOrigin(0.5);
-      container.add(lock);
+      if (this.textures.exists('locked')) {
+        const lock = this.add.image(0, -5, 'locked');
+        lock.setScale(0.5);
+        container.add(lock);
+      } else {
+        const lockText = this.add.text(0, -5, '🔒', {
+          fontSize: '20px'
+        }).setOrigin(0.5);
+        container.add(lockText);
+      }
     }
 
-    container.setSize(140, 60);
+    container.setSize(120, 60);
 
     if (isUnlocked) {
       container.setInteractive({ useHandCursor: true });
 
-      container.on('pointerover', () => {
-        bg.setFillStyle(0x3d2517);
-      });
-
-      container.on('pointerout', () => {
-        bg.setFillStyle(0x2c1810);
-      });
-
       container.on('pointerup', () => {
+        if (this.cache.audio.exists('snd_click')) {
+          this.sound.play('snd_click');
+        }
         this.scene.start('GameScene', { 
           mode: 'singleplayer', 
           levelId: levelId 

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>level_1</key>
+	<dict>
+		<key>drawSpeed</key>
+		<string>0.352</string>
+		<key>name</key>
+		<string>Arthur Rightus</string>
+	</dict>
+	<key>level_10</key>
+	<dict>
+		<key>drawSpeed</key>
+		<string>0.160</string>
+		<key>name</key>
+		<string>The Cowboy</string>
+	</dict>
+	<key>level_2</key>
+	<dict>
+		<key>drawSpeed</key>
+		<string>0.295</string>
+		<key>name</key>
+		<string>Bill Droolin</string>
+	</dict>
+	<key>level_3</key>
+	<dict>
+		<key>drawSpeed</key>
+		<string>0.275</string>
+		<key>name</key>
+		<string>Sloe Jim</string>
+	</dict>
+	<key>level_4</key>
+	<dict>
+		<key>drawSpeed</key>
+		<string>0.250</string>
+		<key>name</key>
+		<string>Chaps Middlegun</string>
+	</dict>
+	<key>level_5</key>
+	<dict>
+		<key>drawSpeed</key>
+		<string>0.225</string>
+		<key>name</key>
+		<string>Van Queef</string>
+	</dict>
+	<key>level_6</key>
+	<dict>
+		<key>drawSpeed</key>
+		<string>0.200</string>
+		<key>name</key>
+		<string>Thomas Edward</string>
+	</dict>
+	<key>level_7</key>
+	<dict>
+		<key>drawSpeed</key>
+		<string>0.190</string>
+		<key>name</key>
+		<string>Doc Hunter</string>
+	</dict>
+	<key>level_8</key>
+	<dict>
+		<key>drawSpeed</key>
+		<string>0.180</string>
+		<key>name</key>
+		<string>Texas Slaughter</string>
+	</dict>
+	<key>level_9</key>
+	<dict>
+		<key>drawSpeed</key>
+		<string>0.175</string>
+		<key>name</key>
+		<string>Aberdeen Bangus</string>
+	</dict>
+</dict>
+</plist>

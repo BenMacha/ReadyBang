@@ -1,73 +1,114 @@
 import Phaser from 'phaser';
-import { GAME_WIDTH, GAME_HEIGHT } from '../config/game-config';
+import { GAME_WIDTH, GAME_HEIGHT, COLORS } from '../config/game-config';
 import { DEATH_ANIMATIONS } from '../config/animations';
 import { gameState } from '../utils/game-state';
 
 export class KillGalleryScene extends Phaser.Scene {
   private currentIndex: number = 0;
+  private cowboySprite!: Phaser.GameObjects.Sprite;
+  private nameText!: Phaser.GameObjects.Text;
+  private descText!: Phaser.GameObjects.Text;
+  private counterText!: Phaser.GameObjects.Text;
+  private lockIcon!: Phaser.GameObjects.Text;
 
   constructor() {
     super({ key: 'KillGalleryScene' });
   }
 
   create(): void {
-    this.cameras.main.setBackgroundColor('#c4956a');
+    this.cameras.main.setBackgroundColor(COLORS.backgroundHex);
     this.currentIndex = 0;
 
     // Title
-    this.add.text(GAME_WIDTH / 2, 30, 'KILL GALLERY', {
-      fontSize: '24px',
-      fontFamily: 'Arial Black',
-      color: '#2c1810'
+    this.add.text(GAME_WIDTH / 2, 25, 'kill gallery', {
+      fontFamily: 'Arial',
+      fontSize: '16px',
+      color: COLORS.textHex
     }).setOrigin(0.5);
 
     // Back button
     this.createBackButton();
 
     // Navigation arrows
-    this.createNavigationArrows();
+    this.createNavigation();
 
-    // Display current death
-    this.showCurrentDeath();
+    // Cowboy display area
+    this.cowboySprite = this.add.sprite(GAME_WIDTH / 2, GAME_HEIGHT / 2 - 20, 'stand_1');
+    this.cowboySprite.setDepth(10);
+
+    // Death name
+    this.nameText = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT - 100, '', {
+      fontFamily: 'Arial',
+      fontSize: '14px',
+      color: COLORS.textHex
+    }).setOrigin(0.5);
+
+    // Death description
+    this.descText = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT - 80, '', {
+      fontFamily: 'Arial',
+      fontSize: '10px',
+      color: COLORS.accentHex
+    }).setOrigin(0.5);
 
     // Counter
-    this.updateCounter();
+    this.counterText = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT - 50, '', {
+      fontFamily: 'Arial',
+      fontSize: '10px',
+      color: COLORS.accentHex
+    }).setOrigin(0.5);
+
+    // Lock icon
+    this.lockIcon = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT / 2 - 20, '🔒', {
+      fontSize: '40px'
+    }).setOrigin(0.5).setDepth(20);
+
+    // Show first death
+    this.showDeath();
+
+    // Tap to play animation
+    this.input.on('pointerup', (pointer: Phaser.Input.Pointer) => {
+      if (pointer.x > 60 && pointer.x < GAME_WIDTH - 60) {
+        this.playCurrentAnimation();
+      }
+    });
   }
 
   private createBackButton(): void {
-    const btn = this.add.container(40, 30);
+    const btn = this.add.container(30, 25);
     
-    const bg = this.add.circle(0, 0, 20, 0x2c1810);
-    const text = this.add.text(0, 0, '←', {
-      fontSize: '20px',
-      color: '#d4a574'
-    }).setOrigin(0.5);
-
-    btn.add([bg, text]);
-    btn.setSize(40, 40);
+    let bg: Phaser.GameObjects.Image | Phaser.GameObjects.Arc;
+    if (this.textures.exists('btn_back')) {
+      bg = this.add.image(0, 0, 'btn_back');
+    } else {
+      bg = this.add.circle(0, 0, 15, COLORS.accent);
+    }
+    
+    btn.add(bg);
+    btn.setSize(30, 30);
     btn.setInteractive({ useHandCursor: true });
 
     btn.on('pointerup', () => {
+      this.sound.play('snd_back');
       this.scene.start('MenuScene');
     });
   }
 
-  private createNavigationArrows(): void {
+  private createNavigation(): void {
     // Left arrow
-    const leftArrow = this.add.text(30, GAME_HEIGHT / 2, '◀', {
-      fontSize: '40px',
-      color: '#2c1810'
+    const leftBtn = this.add.text(30, GAME_HEIGHT / 2, '◀', {
+      fontSize: '30px',
+      color: COLORS.textHex
     }).setOrigin(0.5);
-    leftArrow.setInteractive({ useHandCursor: true });
-    leftArrow.on('pointerup', () => this.navigate(-1));
+    leftBtn.setInteractive({ useHandCursor: true });
+    leftBtn.on('pointerup', () => this.navigate(-1));
 
     // Right arrow
-    const rightArrow = this.add.text(GAME_WIDTH - 30, GAME_HEIGHT / 2, '▶', {
-      fontSize: '40px',
-      color: '#2c1810'
+    const rightBtn = this.add.text(GAME_WIDTH - 30, GAME_HEIGHT / 2, '▶', {
+      fontSize: '30px',
+      color: COLORS.textHex
     }).setOrigin(0.5);
-    rightArrow.setInteractive({ useHandCursor: true });
-    rightArrow.on('pointerup', () => this.navigate(1));
+    rightBtn.setInteractive({ useHandCursor: true });
+    rightBtn.on('pointerup', () => this.navigate(1));
   }
 
   private navigate(direction: number): void {
@@ -79,106 +120,59 @@ export class KillGalleryScene extends Phaser.Scene {
       this.currentIndex = 0;
     }
 
-    this.showCurrentDeath();
-    this.updateCounter();
+    this.showDeath();
   }
 
-  private showCurrentDeath(): void {
-    // Clear previous display
-    const displayArea = this.children.getByName('deathDisplay');
-    if (displayArea) {
-      displayArea.destroy();
-    }
-
+  private showDeath(): void {
     const death = DEATH_ANIMATIONS[this.currentIndex];
     const isUnlocked = gameState.isDeathUnlocked(death.id);
 
-    const container = this.add.container(GAME_WIDTH / 2, GAME_HEIGHT / 2);
-    container.setName('deathDisplay');
-
+    // Update texts
     if (isUnlocked) {
-      // Show death info
-      const nameText = this.add.text(0, -80, death.name, {
-        fontSize: '20px',
-        fontFamily: 'Arial Black',
-        color: '#2c1810',
-        align: 'center'
-      }).setOrigin(0.5);
-
-      const descText = this.add.text(0, -50, death.description, {
-        fontSize: '14px',
-        fontFamily: 'Arial',
-        color: '#5c3d2e',
-        align: 'center'
-      }).setOrigin(0.5);
-
-      // Placeholder for animation
-      const animPlaceholder = this.add.rectangle(0, 50, 150, 150, 0x2c1810, 0.3);
-      animPlaceholder.setStrokeStyle(2, 0x2c1810);
-
-      const playText = this.add.text(0, 50, '▶\nTap to play', {
-        fontSize: '16px',
-        color: '#2c1810',
-        align: 'center'
-      }).setOrigin(0.5);
-
-      container.add([nameText, descText, animPlaceholder, playText]);
-
-      // Make it interactive to play animation
-      animPlaceholder.setInteractive({ useHandCursor: true });
-      animPlaceholder.on('pointerup', () => {
-        this.playDeathAnimation(death.id);
-      });
+      this.nameText.setText(death.name);
+      this.descText.setText(death.description);
+      this.lockIcon.setVisible(false);
+      this.cowboySprite.setVisible(true);
+      
+      // Set to stand pose
+      if (this.anims.exists('stand')) {
+        this.cowboySprite.play('stand');
+      }
     } else {
-      // Locked
-      const lockIcon = this.add.text(0, 0, '🔒', {
-        fontSize: '60px'
-      }).setOrigin(0.5);
-
-      const lockText = this.add.text(0, 60, 'UNSEEN', {
-        fontSize: '18px',
-        fontFamily: 'Arial Black',
-        color: '#666666'
-      }).setOrigin(0.5);
-
-      const hintText = this.add.text(0, 90, `Requires Gun Level ${death.gunLevel}`, {
-        fontSize: '12px',
-        fontFamily: 'Arial',
-        color: '#888888'
-      }).setOrigin(0.5);
-
-      container.add([lockIcon, lockText, hintText]);
+      this.nameText.setText('unseen');
+      this.descText.setText(`requires gun level ${death.gunLevel}`);
+      this.lockIcon.setVisible(true);
+      this.cowboySprite.setVisible(false);
     }
+
+    // Counter
+    const unlockedCount = DEATH_ANIMATIONS.filter(d => gameState.isDeathUnlocked(d.id)).length;
+    this.counterText.setText(`${this.currentIndex + 1} / ${DEATH_ANIMATIONS.length}  •  ${unlockedCount} unlocked`);
   }
 
-  private updateCounter(): void {
-    const counter = this.children.getByName('counter') as Phaser.GameObjects.Text;
-    if (counter) {
-      counter.destroy();
+  private playCurrentAnimation(): void {
+    const death = DEATH_ANIMATIONS[this.currentIndex];
+    const isUnlocked = gameState.isDeathUnlocked(death.id);
+
+    if (!isUnlocked) return;
+
+    const animKey = death.id;
+    
+    if (this.anims.exists(animKey)) {
+      this.cowboySprite.play(animKey);
+      
+      // Play sound
+      const soundKey = `snd_${death.id}`;
+      if (this.cache.audio.exists(soundKey)) {
+        this.sound.play(soundKey);
+      }
+
+      // Return to stand when done
+      this.cowboySprite.once('animationcomplete', () => {
+        if (this.anims.exists('stand')) {
+          this.cowboySprite.play('stand');
+        }
+      });
     }
-
-    const unlockedCount = DEATH_ANIMATIONS.filter(d => 
-      gameState.isDeathUnlocked(d.id)
-    ).length;
-
-    const text = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT - 40, 
-      `${this.currentIndex + 1} / ${DEATH_ANIMATIONS.length}  |  Unlocked: ${unlockedCount}`, {
-      fontSize: '14px',
-      fontFamily: 'Arial',
-      color: '#5c3d2e'
-    }).setOrigin(0.5);
-    text.setName('counter');
-  }
-
-  private playDeathAnimation(deathId: string): void {
-    // Play death sound
-    try {
-      this.sound.play(`snd_${deathId}`);
-    } catch (e) {
-      // Sound not available
-    }
-
-    // TODO: Play actual sprite animation when spritesheets are ready
-    console.log(`Playing animation: ${deathId}`);
   }
 }

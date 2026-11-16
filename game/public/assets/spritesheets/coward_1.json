@@ -1,0 +1,255 @@
+{
+  "frames": {
+    "coward_1_0001.png": {
+      "frame": {
+        "x": 78,
+        "y": 56,
+        "w": 78,
+        "h": 50
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -16,
+        "y": -2,
+        "w": 78,
+        "h": 50
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "coward_1_0002.png": {
+      "frame": {
+        "x": 2,
+        "y": 164,
+        "w": 78,
+        "h": 50
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -16,
+        "y": -2,
+        "w": 78,
+        "h": 50
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "coward_1_0003.png": {
+      "frame": {
+        "x": 2,
+        "y": 2,
+        "w": 76,
+        "h": 52
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -18,
+        "y": -1,
+        "w": 76,
+        "h": 52
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "coward_1_0004.png": {
+      "frame": {
+        "x": 80,
+        "y": 2,
+        "w": 76,
+        "h": 50
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -20,
+        "y": 1,
+        "w": 76,
+        "h": 50
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "coward_1_0005.png": {
+      "frame": {
+        "x": 2,
+        "y": 56,
+        "w": 74,
+        "h": 52
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -21,
+        "y": 2,
+        "w": 74,
+        "h": 52
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "coward_1_0006.png": {
+      "frame": {
+        "x": 2,
+        "y": 110,
+        "w": 74,
+        "h": 52
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -22,
+        "y": 2,
+        "w": 74,
+        "h": 52
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "coward_1_0007.png": {
+      "frame": {
+        "x": 78,
+        "y": 108,
+        "w": 72,
+        "h": 48
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -21,
+        "y": -1,
+        "w": 72,
+        "h": 48
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "coward_1_0008.png": {
+      "frame": {
+        "x": 152,
+        "y": 108,
+        "w": 68,
+        "h": 42
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -19,
+        "y": -4,
+        "w": 68,
+        "h": 42
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "coward_1_0009.png": {
+      "frame": {
+        "x": 152,
+        "y": 194,
+        "w": 68,
+        "h": 40
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -19,
+        "y": -5,
+        "w": 68,
+        "h": 40
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "coward_1_0010.png": {
+      "frame": {
+        "x": 152,
+        "y": 152,
+        "w": 68,
+        "h": 40
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -19,
+        "y": -4,
+        "w": 68,
+        "h": 40
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "coward_1_0011.png": {
+      "frame": {
+        "x": 82,
+        "y": 158,
+        "w": 68,
+        "h": 42
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -19,
+        "y": -4,
+        "w": 68,
+        "h": 42
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "coward_1_0012.png": {
+      "frame": {
+        "x": 82,
+        "y": 202,
+        "w": 68,
+        "h": 42
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -19,
+        "y": -4,
+        "w": 68,
+        "h": 42
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    }
+  },
+  "meta": {
+    "app": "plist-to-phaser-converter",
+    "version": "1.0",
+    "image": "coward_1.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 256,
+      "h": 256
+    },
+    "scale": 1
+  }
+}

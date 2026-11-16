@@ -1,0 +1,7 @@
+{
+  "name": "rsb-scripts",
+  "type": "module",
+  "dependencies": {
+    "plist": "^3.1.0"
+  }
+}

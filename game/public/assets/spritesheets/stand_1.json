@@ -1,0 +1,35 @@
+{
+  "frames": {
+    "stand_1_0001.png": {
+      "frame": {
+        "x": 2,
+        "y": 2,
+        "w": 78,
+        "h": 50
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -18,
+        "y": 0,
+        "w": 78,
+        "h": 50
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    }
+  },
+  "meta": {
+    "app": "plist-to-phaser-converter",
+    "version": "1.0",
+    "image": "stand_1.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 256,
+      "h": 64
+    },
+    "scale": 1
+  }
+}

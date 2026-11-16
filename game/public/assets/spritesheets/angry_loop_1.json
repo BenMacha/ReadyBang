@@ -1,0 +1,295 @@
+{
+  "frames": {
+    "angry_loop_1_0001.png": {
+      "frame": {
+        "x": 62,
+        "y": 172,
+        "w": 56,
+        "h": 28
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -6,
+        "y": -16,
+        "w": 56,
+        "h": 28
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "angry_loop_1_0002.png": {
+      "frame": {
+        "x": 2,
+        "y": 172,
+        "w": 58,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -9,
+        "y": -12,
+        "w": 58,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "angry_loop_1_0003.png": {
+      "frame": {
+        "x": 2,
+        "y": 128,
+        "w": 62,
+        "h": 42
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -11,
+        "y": -9,
+        "w": 62,
+        "h": 42
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "angry_loop_1_0004.png": {
+      "frame": {
+        "x": 72,
+        "y": 88,
+        "w": 66,
+        "h": 44
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -12,
+        "y": -9,
+        "w": 66,
+        "h": 44
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "angry_loop_1_0005.png": {
+      "frame": {
+        "x": 2,
+        "y": 48,
+        "w": 68,
+        "h": 42
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -13,
+        "y": -8,
+        "w": 68,
+        "h": 42
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "angry_loop_1_0006.png": {
+      "frame": {
+        "x": 78,
+        "y": 2,
+        "w": 72,
+        "h": 44
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -13,
+        "y": -8,
+        "w": 72,
+        "h": 44
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "angry_loop_1_0007.png": {
+      "frame": {
+        "x": 2,
+        "y": 2,
+        "w": 74,
+        "h": 44
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -14,
+        "y": -8,
+        "w": 74,
+        "h": 44
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "angry_loop_1_0008.png": {
+      "frame": {
+        "x": 152,
+        "y": 2,
+        "w": 72,
+        "h": 42
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -13,
+        "y": -8,
+        "w": 72,
+        "h": 42
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "angry_loop_1_0009.png": {
+      "frame": {
+        "x": 152,
+        "y": 46,
+        "w": 72,
+        "h": 40
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -10,
+        "y": -10,
+        "w": 72,
+        "h": 40
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "angry_loop_1_0010.png": {
+      "frame": {
+        "x": 72,
+        "y": 48,
+        "w": 68,
+        "h": 38
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -9,
+        "y": -10,
+        "w": 68,
+        "h": 38
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "angry_loop_1_0011.png": {
+      "frame": {
+        "x": 2,
+        "y": 92,
+        "w": 64,
+        "h": 34
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -7,
+        "y": -14,
+        "w": 64,
+        "h": 34
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "angry_loop_1_0012.png": {
+      "frame": {
+        "x": 2,
+        "y": 210,
+        "w": 62,
+        "h": 28
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -3,
+        "y": -16,
+        "w": 62,
+        "h": 28
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "angry_loop_1_0013.png": {
+      "frame": {
+        "x": 66,
+        "y": 134,
+        "w": 58,
+        "h": 26
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -5,
+        "y": -16,
+        "w": 58,
+        "h": 26
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    },
+    "angry_loop_1_0014.png": {
+      "frame": {
+        "x": 66,
+        "y": 202,
+        "w": 56,
+        "h": 26
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": -6,
+        "y": -16,
+        "w": 56,
+        "h": 26
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 150
+      }
+    }
+  },
+  "meta": {
+    "app": "plist-to-phaser-converter",
+    "version": "1.0",
+    "image": "angry_loop_1.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 256,
+      "h": 256
+    },
+    "scale": 1
+  }
+}

@@ -1,97 +1,126 @@
 import Phaser from 'phaser';
-import { GAME_WIDTH, GAME_HEIGHT } from '../config/game-config';
+import { GAME_WIDTH, GAME_HEIGHT, COLORS } from '../config/game-config';
 
 export class MenuScene extends Phaser.Scene {
+  private menuCowboy!: Phaser.GameObjects.Sprite;
+
   constructor() {
     super({ key: 'MenuScene' });
   }
 
   create(): void {
-    // Background
-    this.cameras.main.setBackgroundColor('#c4956a');
+    this.cameras.main.setBackgroundColor(COLORS.backgroundHex);
 
-    // Title
-    const title = this.add.text(GAME_WIDTH / 2, 80, 'READY\nSTEADY\nBANG!', {
-      fontSize: '48px',
-      fontFamily: 'Arial Black',
-      color: '#2c1810',
-      align: 'center',
-      lineSpacing: 10
-    });
-    title.setOrigin(0.5);
+    // Title text - styled like original
+    const titleY = 60;
+    
+    this.add.text(GAME_WIDTH / 2, titleY, 'ready steady bang', {
+      fontFamily: 'Arial, sans-serif',
+      fontSize: '18px',
+      color: COLORS.accentHex,
+      fontStyle: 'normal'
+    }).setOrigin(0.5);
 
-    // Subtitle
-    const subtitle = this.add.text(GAME_WIDTH / 2, 180, 'A Western Quick Draw Duel', {
-      fontSize: '14px',
-      fontFamily: 'Arial',
-      color: '#5c3d2e',
-      align: 'center'
-    });
-    subtitle.setOrigin(0.5);
+    // Animated cowboy in center
+    this.createMenuCowboy();
 
-    // 1 Player Button
-    const btn1P = this.createButton(GAME_WIDTH / 2, 280, '1 PLAYER', () => {
+    // Menu buttons
+    const buttonY = 320;
+    const buttonSpacing = 55;
+
+    this.createMenuButton(GAME_WIDTH / 2, buttonY, '1 player', () => {
       this.scene.start('LevelSelectScene');
     });
 
-    // 2 Players Button
-    const btn2P = this.createButton(GAME_WIDTH / 2, 350, '2 PLAYERS', () => {
+    this.createMenuButton(GAME_WIDTH / 2, buttonY + buttonSpacing, '2 player', () => {
       this.scene.start('GameScene', { mode: 'multiplayer' });
     });
 
-    // Kill Gallery Button
-    const btnGallery = this.createButton(GAME_WIDTH / 2, 420, 'KILL GALLERY', () => {
+    this.createMenuButton(GAME_WIDTH / 2, buttonY + buttonSpacing * 2, 'kill gallery', () => {
       this.scene.start('KillGalleryScene');
     });
 
-    // Add cowboy silhouette decoration (placeholder)
-    this.add.rectangle(80, GAME_HEIGHT - 60, 60, 100, 0x2c1810);
-    this.add.rectangle(GAME_WIDTH - 80, GAME_HEIGHT - 60, 60, 100, 0x2c1810);
+    // Credits at bottom
+    this.add.text(GAME_WIDTH / 2, GAME_HEIGHT - 30, 'by Animade\n& Hover Studio', {
+      fontFamily: 'Arial, sans-serif',
+      fontSize: '10px',
+      color: COLORS.accentHex,
+      align: 'center'
+    }).setOrigin(0.5);
   }
 
-  private createButton(x: number, y: number, text: string, callback: () => void): Phaser.GameObjects.Container {
+  private createMenuCowboy(): void {
+    // Position cowboy in center
+    const cowboyY = 180;
+
+    // Check if animation exists
+    if (this.anims.exists('menu_anim')) {
+      this.menuCowboy = this.add.sprite(GAME_WIDTH / 2, cowboyY, 'menu_1');
+      this.menuCowboy.play('menu_anim');
+      this.menuCowboy.setScale(1);
+    } else {
+      // Fallback: use stand sprite or placeholder
+      if (this.textures.exists('stand_1')) {
+        this.menuCowboy = this.add.sprite(GAME_WIDTH / 2, cowboyY, 'stand_1');
+        const frames = this.textures.get('stand_1').getFrameNames();
+        if (frames.length > 0) {
+          this.menuCowboy.setFrame(frames[0]);
+        }
+      } else {
+        // Ultimate fallback: gray rectangle placeholder
+        this.add.rectangle(GAME_WIDTH / 2, cowboyY, 60, 80, COLORS.primary);
+      }
+    }
+  }
+
+  private createMenuButton(x: number, y: number, text: string, callback: () => void): void {
     const container = this.add.container(x, y);
 
-    // Button background
-    const bg = this.add.rectangle(0, 0, 200, 50, 0x2c1810);
-    bg.setStrokeStyle(3, 0x1a0f0a);
+    // Button background - try to use original asset
+    let bg: Phaser.GameObjects.Image | Phaser.GameObjects.Rectangle;
     
+    if (this.textures.exists('btn_menu_bg')) {
+      bg = this.add.image(0, 0, 'btn_menu_bg');
+    } else {
+      // Fallback rectangle
+      bg = this.add.rectangle(0, 0, 150, 40, 0xeeeeee);
+      (bg as Phaser.GameObjects.Rectangle).setStrokeStyle(1, COLORS.divider);
+    }
+
     // Button text
     const label = this.add.text(0, 0, text, {
-      fontSize: '18px',
-      fontFamily: 'Arial Black',
-      color: '#d4a574'
+      fontFamily: 'Arial, sans-serif',
+      fontSize: '14px',
+      color: COLORS.textHex
     });
     label.setOrigin(0.5);
 
     container.add([bg, label]);
-    container.setSize(200, 50);
+    container.setSize(150, 40);
     container.setInteractive({ useHandCursor: true });
 
-    // Hover effects
+    // Hover/press effects
     container.on('pointerover', () => {
-      bg.setFillStyle(0x3d2517);
+      if (this.textures.exists('btn_menu_bg_sel')) {
+        (bg as Phaser.GameObjects.Image).setTexture('btn_menu_bg_sel');
+      }
     });
 
     container.on('pointerout', () => {
-      bg.setFillStyle(0x2c1810);
-    });
-
-    container.on('pointerdown', () => {
-      bg.setFillStyle(0x1a0f0a);
+      if (this.textures.exists('btn_menu_bg')) {
+        (bg as Phaser.GameObjects.Image).setTexture('btn_menu_bg');
+      }
     });
 
     container.on('pointerup', () => {
-      this.playClickSound();
+      this.playSound('snd_click');
       callback();
     });
-
-    return container;
   }
 
-  private playClickSound(): void {
-    if (this.sound.get('snd_click')) {
-      this.sound.play('snd_click');
+  private playSound(key: string): void {
+    if (this.sound.get(key) || this.cache.audio.exists(key)) {
+      this.sound.play(key);
     }
   }
 }

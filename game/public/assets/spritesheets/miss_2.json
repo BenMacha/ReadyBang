@@ -1,0 +1,435 @@
+{
+  "frames": {
+    "miss_2_0001.png": {
+      "frame": {
+        "x": 42,
+        "y": 80,
+        "w": 12,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": -12,
+        "w": 12,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0002.png": {
+      "frame": {
+        "x": 42,
+        "y": 58,
+        "w": 16,
+        "h": 20
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": -9,
+        "w": 16,
+        "h": 20
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0003.png": {
+      "frame": {
+        "x": 34,
+        "y": 100,
+        "w": 18,
+        "h": 24
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -8,
+        "w": 18,
+        "h": 24
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0004.png": {
+      "frame": {
+        "x": 26,
+        "y": 2,
+        "w": 18,
+        "h": 24
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": -8,
+        "w": 18,
+        "h": 24
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0005.png": {
+      "frame": {
+        "x": 46,
+        "y": 2,
+        "w": 18,
+        "h": 24
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -8,
+        "w": 18,
+        "h": 24
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0006.png": {
+      "frame": {
+        "x": 26,
+        "y": 104,
+        "w": 6,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -8,
+        "w": 6,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0007.png": {
+      "frame": {
+        "x": 42,
+        "y": 28,
+        "w": 6,
+        "h": 28
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -6,
+        "w": 6,
+        "h": 28
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0008.png": {
+      "frame": {
+        "x": 34,
+        "y": 66,
+        "w": 6,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -4,
+        "w": 6,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0009.png": {
+      "frame": {
+        "x": 2,
+        "y": 78,
+        "w": 6,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -2,
+        "w": 6,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0010.png": {
+      "frame": {
+        "x": 18,
+        "y": 40,
+        "w": 6,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -2,
+        "w": 6,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0011.png": {
+      "frame": {
+        "x": 10,
+        "y": 40,
+        "w": 6,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -2,
+        "w": 6,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0012.png": {
+      "frame": {
+        "x": 26,
+        "y": 28,
+        "w": 6,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -2,
+        "w": 6,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0013.png": {
+      "frame": {
+        "x": 10,
+        "y": 78,
+        "w": 6,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -2,
+        "w": 6,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0014.png": {
+      "frame": {
+        "x": 34,
+        "y": 28,
+        "w": 6,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -2,
+        "w": 6,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0015.png": {
+      "frame": {
+        "x": 10,
+        "y": 2,
+        "w": 6,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -2,
+        "w": 6,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0016.png": {
+      "frame": {
+        "x": 2,
+        "y": 40,
+        "w": 6,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -2,
+        "w": 6,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0017.png": {
+      "frame": {
+        "x": 2,
+        "y": 2,
+        "w": 6,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -2,
+        "w": 6,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0018.png": {
+      "frame": {
+        "x": 26,
+        "y": 66,
+        "w": 6,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -2,
+        "w": 6,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0019.png": {
+      "frame": {
+        "x": 18,
+        "y": 2,
+        "w": 6,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -2,
+        "w": 6,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0020.png": {
+      "frame": {
+        "x": 18,
+        "y": 78,
+        "w": 6,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -2,
+        "w": 6,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    },
+    "miss_2_0021.png": {
+      "frame": {
+        "x": 2,
+        "y": 116,
+        "w": 6,
+        "h": 4
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": -17,
+        "w": 6,
+        "h": 4
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 40
+      }
+    }
+  },
+  "meta": {
+    "app": "plist-to-phaser-converter",
+    "version": "1.0",
+    "image": "miss_2.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 64,
+      "h": 128
+    },
+    "scale": 1
+  }
+}
