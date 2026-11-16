@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { GAME_WIDTH, COLORS, FONT_FAMILY } from '../config/game-config';
+import { GAME_WIDTH, COLORS, FONT_FAMILY, HOME_BUTTON } from '../config/game-config';
 import { LEVELS } from '../config/levels';
 import { gameState } from '../utils/game-state';
 
@@ -26,25 +26,18 @@ export class LevelSelectScene extends Phaser.Scene {
   }
 
   private createBackButton(): void {
-    const btn = this.add.container(30, 30);
-    
-    let bg: Phaser.GameObjects.Image | Phaser.GameObjects.Arc;
     if (this.textures.exists('btn_back')) {
-      bg = this.add.image(0, 0, 'btn_back');
-    } else {
-      bg = this.add.circle(0, 0, 15, COLORS.accent);
-    }
-    
-    btn.add(bg);
-    btn.setSize(30, 30);
-    btn.setInteractive({ useHandCursor: true });
+      const btn = this.add.image(HOME_BUTTON.x, HOME_BUTTON.y, 'btn_back');
+      btn.setScale(HOME_BUTTON.scale);
+      btn.setInteractive({ useHandCursor: true });
 
-    btn.on('pointerup', () => {
-      if (this.cache.audio.exists('snd_back')) {
-        this.sound.play('snd_back');
-      }
-      this.scene.start('MenuScene');
-    });
+      btn.on('pointerup', () => {
+        if (this.cache.audio.exists('snd_back')) {
+          this.sound.play('snd_back');
+        }
+        this.scene.start('MenuScene');
+      });
+    }
   }
 
   private createLevelGrid(): void {

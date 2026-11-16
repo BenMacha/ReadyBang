@@ -7,6 +7,13 @@ export const GAME_HEIGHT = 480;
 // Western style font
 export const FONT_FAMILY = '"Rye", "Staatliches", "Georgia", serif';
 
+// Home button position and size (consistent across all scenes)
+export const HOME_BUTTON = {
+  x: 25,
+  y: 25,
+  scale: 0.35  // 85px * 0.35 ≈ 30px
+};
+
 // Colors from the original game
 export const COLORS = {
   background: 0xf5f5f5,      // Light gray/white

@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { GAME_WIDTH, GAME_HEIGHT, COLORS, FONT_FAMILY } from '../config/game-config';
+import { GAME_WIDTH, GAME_HEIGHT, COLORS, FONT_FAMILY, HOME_BUTTON } from '../config/game-config';
 import { LEVELS, STEADY_DELAY_MIN, STEADY_DELAY_MAX, LevelConfig } from '../config/levels';
 import { gameState } from '../utils/game-state';
 
@@ -93,30 +93,21 @@ export class GameScene extends Phaser.Scene {
   }
 
   private createHomeButton(): void {
-    this.homeButton = this.add.container(25, 25);
-    
-    let bg: Phaser.GameObjects.Image | Phaser.GameObjects.Arc;
     if (this.textures.exists('btn_back')) {
-      bg = this.add.image(0, 0, 'btn_back');
-    } else {
-      bg = this.add.circle(0, 0, 12, 0x999999);
-      const icon = this.add.text(0, 0, '⌂', { fontSize: '14px', color: '#fff' }).setOrigin(0.5);
-      this.homeButton.add(icon);
+      const btn = this.add.image(HOME_BUTTON.x, HOME_BUTTON.y, 'btn_back');
+      btn.setScale(HOME_BUTTON.scale);
+      btn.setInteractive({ useHandCursor: true });
+      btn.setDepth(200);
+      
+      btn.on('pointerup', () => {
+        this.playSound('snd_back');
+        if (this.mode === 'singleplayer') {
+          this.scene.start('LevelSelectScene');
+        } else {
+          this.scene.start('MultiplayerSetupScene');
+        }
+      });
     }
-    
-    this.homeButton.add(bg);
-    this.homeButton.setSize(24, 24);
-    this.homeButton.setInteractive({ useHandCursor: true });
-    this.homeButton.setDepth(200);
-
-    this.homeButton.on('pointerup', () => {
-      this.playSound('snd_back');
-      if (this.mode === 'singleplayer') {
-        this.scene.start('LevelSelectScene');
-      } else {
-        this.scene.start('MultiplayerSetupScene');
-      }
-    });
   }
 
   private createPhaseImage(): void {
