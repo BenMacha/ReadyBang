@@ -562,6 +562,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   private playCowboyAnim(cowboy: Phaser.GameObjects.Sprite, animKey: string): void {
+    // Map animation key to atlas key
     let atlasKey = animKey;
     
     if (animKey === 'stand') atlasKey = 'stand_1';
@@ -569,11 +570,26 @@ export class GameScene extends Phaser.Scene {
     else if (animKey === 'win') atlasKey = 'win_1';
     else if (animKey === 'coward') atlasKey = 'coward_1';
     else if (animKey === 'angry') atlasKey = 'angry_1';
+    // death_X animations use their own atlas (death_1, death_2, etc.)
+    // No mapping needed - animKey is already the atlas key
     
+    // Check if animation already exists
     if (this.anims.exists(animKey)) {
       cowboy.play(animKey);
-    } else if (this.textures.exists(atlasKey)) {
-      const frames = this.textures.get(atlasKey).getFrameNames().sort();
+      return;
+    }
+    
+    // Create animation if atlas exists
+    if (this.textures.exists(atlasKey)) {
+      const frames = this.textures.get(atlasKey).getFrameNames();
+      
+      // Sort frames numerically (death_1_0001.png, death_1_0002.png, etc.)
+      frames.sort((a, b) => {
+        const numA = parseInt(a.match(/(\d+)\.png$/)?.[1] || '0');
+        const numB = parseInt(b.match(/(\d+)\.png$/)?.[1] || '0');
+        return numA - numB;
+      });
+      
       if (frames.length > 0) {
         this.anims.create({
           key: animKey,
