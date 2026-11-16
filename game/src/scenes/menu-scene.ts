@@ -87,11 +87,11 @@ export class MenuScene extends Phaser.Scene {
       (bg as Phaser.GameObjects.Rectangle).setStrokeStyle(1, COLORS.divider);
     }
 
-    // Button text
+    // Button text - white on dark background
     const label = this.add.text(0, 0, text, {
       fontFamily: 'Arial, sans-serif',
       fontSize: '14px',
-      color: COLORS.textHex
+      color: '#ffffff'
     });
     label.setOrigin(0.5);
 

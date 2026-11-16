@@ -1,0 +1,19 @@
+{
+  "name": "readybang",
+  "version": "1.0.0",
+  "description": "Remake moderne du jeu mobile **Ready Steady Bang** - un jeu de duel western \"quick draw\".",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "puppeteer": "^25.17.0"
+  },
+  "allowScripts": {
+    "puppeteer@25.17.0": true
+  }
+}

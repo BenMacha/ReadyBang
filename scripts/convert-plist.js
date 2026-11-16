@@ -15,6 +15,7 @@ const OUTPUT_DIR = '../game/public/assets/spritesheets';
 function parseFrame(frameName, frameData, metadata) {
   // Cocos2D format: {{x, y}, {w, h}}
   const parseRect = (str) => {
+    if (!str) return null;
     const matches = str.match(/\{?\{(\d+),\s*(\d+)\},\s*\{(\d+),\s*(\d+)\}\}?/);
     if (matches) {
       return {
@@ -28,6 +29,7 @@ function parseFrame(frameName, frameData, metadata) {
   };
 
   const parseSize = (str) => {
+    if (!str) return null;
     const matches = str.match(/\{(\d+),\s*(\d+)\}/);
     if (matches) {
       return { w: parseInt(matches[1]), h: parseInt(matches[2]) };
@@ -35,21 +37,26 @@ function parseFrame(frameName, frameData, metadata) {
     return null;
   };
 
-  const parseOffset = (str) => {
-    const matches = str.match(/\{(-?\d+),\s*(-?\d+)\}/);
-    if (matches) {
-      return { x: parseInt(matches[1]), y: parseInt(matches[2]) };
-    }
-    return { x: 0, y: 0 };
-  };
-
+  // textureRect = position and size in the spritesheet
   const textureRect = parseRect(frameData.textureRect || frameData.frame);
+  
+  // spriteSourceSize = original frame size before trimming
   const sourceSize = parseSize(frameData.spriteSourceSize || frameData.sourceSize);
-  const offset = parseOffset(frameData.spriteOffset || frameData.offset || '{0, 0}');
+  
+  // spriteColorRect = where the trimmed sprite sits in the original frame
+  const colorRect = parseRect(frameData.spriteColorRect);
 
   if (!textureRect) {
     console.warn(`  Could not parse frame: ${frameName}`);
     return null;
+  }
+
+  // For Phaser, spriteSourceSize is where to place the trimmed sprite
+  // in the original frame coordinate space
+  let ssX = 0, ssY = 0;
+  if (colorRect) {
+    ssX = colorRect.x;
+    ssY = colorRect.y;
   }
 
   return {
@@ -62,8 +69,8 @@ function parseFrame(frameName, frameData, metadata) {
     rotated: frameData.textureRotated || false,
     trimmed: frameData.spriteTrimmed || false,
     spriteSourceSize: {
-      x: offset.x,
-      y: offset.y,
+      x: ssX,
+      y: ssY,
       w: textureRect.w,
       h: textureRect.h
     },

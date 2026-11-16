@@ -23,9 +23,8 @@ export class GameScene extends Phaser.Scene {
   // Game objects
   private playerCowboy!: Phaser.GameObjects.Sprite;
   private opponentCowboy!: Phaser.GameObjects.Sprite;
-  private phaseImage!: Phaser.GameObjects.Image;
+  private phaseText!: Phaser.GameObjects.Text;
   private dividerLine!: Phaser.GameObjects.Graphics;
-  private levelBackground!: Phaser.GameObjects.Image;
   
   // Score display
   private playerScoreText!: Phaser.GameObjects.Text;
@@ -55,16 +54,12 @@ export class GameScene extends Phaser.Scene {
     this.opponentTapped = false;
     this.playerShootTime = 0;
     this.opponentShootTime = 0;
+    this.playerScore = 0;
+    this.opponentScore = 0;
   }
 
   create(): void {
     this.cameras.main.setBackgroundColor(COLORS.backgroundHex);
-
-    // Level background (small image in center showing the scene)
-    if (this.level && this.textures.exists(this.level.background)) {
-      this.levelBackground = this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, this.level.background);
-      this.levelBackground.setScale(2); // Scale up the small level image
-    }
 
     // Draw dotted divider line
     this.createDividerLine();
@@ -72,12 +67,17 @@ export class GameScene extends Phaser.Scene {
     // Create cowboys
     this.createCowboys();
 
-    // Phase image (READY, STEADY, BANG!)
-    this.phaseImage = this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, 'ready_img');
-    this.phaseImage.setVisible(false);
-    this.phaseImage.setDepth(100);
+    // Phase text (READY, STEADY, BANG!)
+    this.phaseText = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT / 2, '', {
+      fontFamily: 'Arial, sans-serif',
+      fontSize: '24px',
+      color: COLORS.textHex,
+      fontStyle: 'bold'
+    });
+    this.phaseText.setOrigin(0.5);
+    this.phaseText.setDepth(100);
 
-    // Score display for multiplayer
+    // Score display
     this.createScoreDisplay();
 
     // Input zones
@@ -89,11 +89,11 @@ export class GameScene extends Phaser.Scene {
 
   private createDividerLine(): void {
     this.dividerLine = this.add.graphics();
-    this.dividerLine.lineStyle(2, COLORS.divider, 1);
+    this.dividerLine.lineStyle(1, COLORS.divider, 0.5);
     
     const y = GAME_HEIGHT / 2;
-    const dashLength = 8;
-    const gapLength = 8;
+    const dashLength = 6;
+    const gapLength = 6;
     let x = 0;
     
     while (x < GAME_WIDTH) {
@@ -109,67 +109,56 @@ export class GameScene extends Phaser.Scene {
     const playerY = GAME_HEIGHT * 0.75;
     const opponentY = GAME_HEIGHT * 0.25;
 
-    // Player cowboy (bottom)
-    if (this.anims.exists('stand')) {
-      this.playerCowboy = this.add.sprite(GAME_WIDTH / 2, playerY, 'stand_1');
-      this.playerCowboy.play('stand');
-    } else if (this.textures.exists('stand_1')) {
-      this.playerCowboy = this.add.sprite(GAME_WIDTH / 2, playerY, 'stand_1');
-      const frames = this.textures.get('stand_1').getFrameNames();
-      if (frames.length > 0) this.playerCowboy.setFrame(frames[0]);
-    } else {
-      // Placeholder
-      this.playerCowboy = this.add.sprite(GAME_WIDTH / 2, playerY, '__DEFAULT');
-      this.add.rectangle(GAME_WIDTH / 2, playerY, 50, 70, COLORS.primary);
-    }
+    // Player cowboy (bottom) - use stand_1 spritesheet
+    this.playerCowboy = this.add.sprite(GAME_WIDTH / 2, playerY, 'stand_1');
     this.playerCowboy.setDepth(50);
-
-    // Opponent cowboy (top, flipped)
-    if (this.anims.exists('stand')) {
-      this.opponentCowboy = this.add.sprite(GAME_WIDTH / 2, opponentY, 'stand_1');
-      this.opponentCowboy.play('stand');
-    } else if (this.textures.exists('stand_1')) {
-      this.opponentCowboy = this.add.sprite(GAME_WIDTH / 2, opponentY, 'stand_1');
-      const frames = this.textures.get('stand_1').getFrameNames();
-      if (frames.length > 0) this.opponentCowboy.setFrame(frames[0]);
-    } else {
-      this.opponentCowboy = this.add.sprite(GAME_WIDTH / 2, opponentY, '__DEFAULT');
-      this.add.rectangle(GAME_WIDTH / 2, opponentY, 50, 70, COLORS.primary);
+    this.playerCowboy.setOrigin(0.5, 0.5);
+    
+    // Set initial frame
+    const standFrames = this.textures.get('stand_1').getFrameNames().sort();
+    if (standFrames.length > 0) {
+      this.playerCowboy.setFrame(standFrames[0]);
     }
-    this.opponentCowboy.setFlipY(true); // Flip for opponent
+
+    // Opponent cowboy (top, flipped vertically)
+    this.opponentCowboy = this.add.sprite(GAME_WIDTH / 2, opponentY, 'stand_1');
     this.opponentCowboy.setDepth(50);
+    this.opponentCowboy.setOrigin(0.5, 0.5);
+    this.opponentCowboy.setFlipY(true);
+    
+    if (standFrames.length > 0) {
+      this.opponentCowboy.setFrame(standFrames[0]);
+    }
   }
 
   private createScoreDisplay(): void {
-    // Score labels
-    this.add.text(10, GAME_HEIGHT / 2 + 10, 'ME', {
+    // ME label and score (bottom half)
+    this.add.text(15, GAME_HEIGHT / 2 + 15, 'ME', {
       fontFamily: 'Arial',
       fontSize: '10px',
       color: COLORS.accentHex
     });
 
-    this.playerScoreText = this.add.text(10, GAME_HEIGHT / 2 + 25, '0', {
+    this.playerScoreText = this.add.text(15, GAME_HEIGHT / 2 + 28, '0', {
       fontFamily: 'Arial',
-      fontSize: '16px',
-      color: COLORS.textHex
+      fontSize: '18px',
+      color: COLORS.textHex,
+      fontStyle: 'bold'
     });
 
-    this.add.text(10, GAME_HEIGHT / 2 - 25, 'HIM', {
+    // HIM label and score (top half)
+    this.add.text(15, GAME_HEIGHT / 2 - 45, 'HIM', {
       fontFamily: 'Arial',
       fontSize: '10px',
       color: COLORS.accentHex
     });
 
-    this.opponentScoreText = this.add.text(10, GAME_HEIGHT / 2 - 45, '0', {
+    this.opponentScoreText = this.add.text(15, GAME_HEIGHT / 2 - 32, '0', {
       fontFamily: 'Arial',
-      fontSize: '16px',
-      color: COLORS.textHex
+      fontSize: '18px',
+      color: COLORS.textHex,
+      fontStyle: 'bold'
     });
-
-    // Divider image
-    if (this.textures.exists('scoreboard_divider')) {
-      this.add.image(25, GAME_HEIGHT / 2, 'scoreboard_divider');
-    }
   }
 
   private createInputZones(): void {
@@ -191,18 +180,18 @@ export class GameScene extends Phaser.Scene {
     this.opponentTapped = false;
 
     // Reset cowboys to stand
-    this.playCowboyAnim(this.playerCowboy, 'stand');
-    this.playCowboyAnim(this.opponentCowboy, 'stand');
+    this.resetCowboyToStand(this.playerCowboy);
+    this.resetCowboyToStand(this.opponentCowboy);
 
     // READY phase
     this.phase = 'ready';
-    this.showPhaseImage('ready_img');
+    this.showPhaseText('ready');
     this.playSound('snd_ready');
 
     this.time.delayedCall(1000, () => {
       // STEADY phase
       this.phase = 'steady';
-      this.showPhaseImage('steady_img');
+      this.showPhaseText('steady');
       this.playSound('snd_steady');
 
       // Random delay before BANG
@@ -220,7 +209,7 @@ export class GameScene extends Phaser.Scene {
     this.phase = 'bang';
     this.bangTime = this.time.now;
     
-    this.showPhaseImage('bang');
+    this.showPhaseText('bang!');
     this.playSound('snd_bang');
 
     // AI shoots after draw speed (singleplayer)
@@ -232,7 +221,7 @@ export class GameScene extends Phaser.Scene {
       });
     }
 
-    // Timeout
+    // Timeout after 3 seconds
     this.time.delayedCall(3000, () => {
       if (this.phase === 'bang') {
         this.endRound('timeout');
@@ -260,8 +249,8 @@ export class GameScene extends Phaser.Scene {
         const aiReaction = this.level!.drawSpeed * 1000;
         
         if (playerReaction < aiReaction) {
-          // Player wins
-          this.time.delayedCall(300, () => {
+          // Player wins - delay to show shoot animation
+          this.time.delayedCall(200, () => {
             this.endRound('player_wins', playerReaction);
           });
         }
@@ -295,7 +284,7 @@ export class GameScene extends Phaser.Scene {
     this.playSound('snd_gunshot');
     
     if (!this.playerTapped) {
-      this.time.delayedCall(300, () => {
+      this.time.delayedCall(200, () => {
         this.endRound('opponent_wins');
       });
     }
@@ -313,7 +302,7 @@ export class GameScene extends Phaser.Scene {
 
   private endRound(result: string, reactionTime?: number): void {
     this.phase = 'result';
-    this.phaseImage.setVisible(false);
+    this.phaseText.setVisible(false);
 
     // Pick random death animation
     const deathIndex = Phaser.Math.Between(1, 31);
@@ -321,13 +310,15 @@ export class GameScene extends Phaser.Scene {
 
     switch (result) {
       case 'player_wins':
-        this.showPhaseImage('win_img');
         this.playCowboyAnim(this.playerCowboy, 'win');
         this.playCowboyAnim(this.opponentCowboy, deathAnim);
         this.playSound('music_win');
         this.playSound(`snd_death_${deathIndex}`);
         this.playerScore++;
         this.playerScoreText.setText(this.playerScore.toString());
+        
+        // Show WIN text
+        this.showResultText('WIN!', '#4CAF50');
         
         // Unlock death and level
         if (this.mode === 'singleplayer') {
@@ -342,19 +333,22 @@ export class GameScene extends Phaser.Scene {
         break;
 
       case 'opponent_wins':
-        this.showPhaseImage('lose_img');
         this.playCowboyAnim(this.opponentCowboy, 'win');
         this.playCowboyAnim(this.playerCowboy, deathAnim);
         this.playSound('music_lose');
         this.playSound(`snd_death_${deathIndex}`);
         this.opponentScore++;
         this.opponentScoreText.setText(this.opponentScore.toString());
+        
+        // Show LOSE text
+        this.showResultText('LOSE', '#f44336');
         break;
 
       case 'player_early':
         this.playCowboyAnim(this.opponentCowboy, 'angry');
         this.opponentScore++;
         this.opponentScoreText.setText(this.opponentScore.toString());
+        this.showResultText('TOO EARLY!', '#ff9800');
         break;
 
       case 'opponent_early':
@@ -362,14 +356,18 @@ export class GameScene extends Phaser.Scene {
         this.playerScore++;
         this.playerScoreText.setText(this.playerScore.toString());
         break;
+        
+      case 'timeout':
+        this.showResultText('TIMEOUT', '#ff9800');
+        break;
     }
 
-    // Show reaction time
-    if (reactionTime) {
+    // Show reaction time if player won
+    if (reactionTime && result === 'player_wins') {
       this.time.delayedCall(500, () => {
-        this.add.text(GAME_WIDTH / 2, GAME_HEIGHT / 2 + 50, `${reactionTime.toFixed(0)}ms`, {
+        const timeText = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT / 2 + 40, `${reactionTime.toFixed(0)}ms`, {
           fontFamily: 'Arial',
-          fontSize: '20px',
+          fontSize: '16px',
           color: COLORS.textHex
         }).setOrigin(0.5).setDepth(200);
       });
@@ -385,24 +383,69 @@ export class GameScene extends Phaser.Scene {
     });
   }
 
-  private showPhaseImage(key: string): void {
-    if (this.textures.exists(key)) {
-      this.phaseImage.setTexture(key);
-      this.phaseImage.setVisible(true);
-      this.phaseImage.setScale(0);
-      
-      this.tweens.add({
-        targets: this.phaseImage,
-        scale: 1,
-        duration: 100,
-        ease: 'Back.easeOut'
-      });
+  private showPhaseText(text: string): void {
+    this.phaseText.setText(text);
+    this.phaseText.setVisible(true);
+    this.phaseText.setScale(0);
+    
+    this.tweens.add({
+      targets: this.phaseText,
+      scale: 1,
+      duration: 100,
+      ease: 'Back.easeOut'
+    });
+  }
+  
+  private showResultText(text: string, color: string): void {
+    const resultText = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT / 2, text, {
+      fontFamily: 'Arial',
+      fontSize: '28px',
+      color: color,
+      fontStyle: 'bold'
+    }).setOrigin(0.5).setDepth(200);
+    
+    resultText.setScale(0);
+    this.tweens.add({
+      targets: resultText,
+      scale: 1,
+      duration: 200,
+      ease: 'Back.easeOut'
+    });
+  }
+
+  private resetCowboyToStand(cowboy: Phaser.GameObjects.Sprite): void {
+    const frames = this.textures.get('stand_1').getFrameNames().sort();
+    if (frames.length > 0) {
+      cowboy.setTexture('stand_1', frames[0]);
     }
   }
 
   private playCowboyAnim(cowboy: Phaser.GameObjects.Sprite, animKey: string): void {
+    // Map animation key to atlas
+    let atlasKey = animKey;
+    
+    // Handle special cases
+    if (animKey === 'stand') atlasKey = 'stand_1';
+    else if (animKey === 'shoot') atlasKey = 'shoot_1';
+    else if (animKey === 'win') atlasKey = 'win_1';
+    else if (animKey === 'coward') atlasKey = 'coward_1';
+    else if (animKey === 'angry') atlasKey = 'angry_1';
+    
+    // Check if animation exists, otherwise play frames manually
     if (this.anims.exists(animKey)) {
       cowboy.play(animKey);
+    } else if (this.textures.exists(atlasKey)) {
+      // Create animation on the fly
+      const frames = this.textures.get(atlasKey).getFrameNames().sort();
+      if (frames.length > 0) {
+        this.anims.create({
+          key: animKey,
+          frames: frames.map(f => ({ key: atlasKey, frame: f })),
+          frameRate: 24,
+          repeat: animKey.includes('loop') ? -1 : 0
+        });
+        cowboy.play(animKey);
+      }
     }
   }
 

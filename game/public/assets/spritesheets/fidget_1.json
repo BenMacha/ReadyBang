@@ -10,8 +10,8 @@
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": -20,
-        "y": 4,
+        "x": 144,
+        "y": 46,
         "w": 72,
         "h": 50
       },
@@ -30,8 +30,8 @@
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": -19,
-        "y": 3,
+        "x": 145,
+        "y": 47,
         "w": 72,
         "h": 50
       },
@@ -50,8 +50,8 @@
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": -18,
-        "y": 2,
+        "x": 146,
+        "y": 48,
         "w": 72,
         "h": 50
       },
@@ -70,8 +70,8 @@
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": -17,
-        "y": 1,
+        "x": 147,
+        "y": 49,
         "w": 72,
         "h": 50
       },
@@ -90,8 +90,8 @@
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": -16,
-        "y": 1,
+        "x": 148,
+        "y": 49,
         "w": 72,
         "h": 50
       },
@@ -110,8 +110,8 @@
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": -17,
-        "y": 1,
+        "x": 147,
+        "y": 49,
         "w": 72,
         "h": 50
       },
@@ -130,8 +130,8 @@
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": -17,
-        "y": 0,
+        "x": 146,
+        "y": 50,
         "w": 74,
         "h": 50
       },
@@ -150,8 +150,8 @@
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": -17,
-        "y": 0,
+        "x": 145,
+        "y": 51,
         "w": 76,
         "h": 48
       },
@@ -170,8 +170,8 @@
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": -18,
-        "y": 0,
+        "x": 144,
+        "y": 50,
         "w": 76,
         "h": 50
       },
@@ -190,8 +190,8 @@
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": -18,
-        "y": 0,
+        "x": 144,
+        "y": 50,
         "w": 76,
         "h": 50
       },
